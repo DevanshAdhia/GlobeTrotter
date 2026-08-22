@@ -1,7 +1,9 @@
 .admin-sidebar {
   width: var(--sidebar-width);
-  background-color: var(--surface);
-  border-right: 1px solid var(--border);
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid var(--glass-border);
   display: flex;
   flex-direction: column;
   height: 100vh;
