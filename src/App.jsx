@@ -16,16 +16,34 @@ import Analytics from './pages/admin/Analytics';
 import Notifications from './pages/admin/Notifications';
 import Settings from './pages/admin/Settings';
 import { AdminProvider } from './context/AdminContext';
+import { ClientProvider } from './context/ClientContext';
+import ClientLayout from './layouts/ClientLayout';
+import Home from './pages/client/Home';
+import MyTrips from './pages/client/MyTrips';
+import CreateTrip from './pages/client/CreateTrip';
+import Discover from './pages/client/Discover';
+import ItineraryBuilder from './pages/client/ItineraryBuilder';
+import ClientTripDetails from './pages/client/ClientTripDetails';
+import Profile from './pages/client/Profile';
 
 function App() {
   return (
     <AdminProvider>
-      <BrowserRouter>
-        <Routes>
-          {/* Placeholder for client-side app root */}
-          <Route path="/" element={<Navigate to="/admin" replace />} />
+      <ClientProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Client Routes */}
+            <Route path="/" element={<ClientLayout />}>
+              <Route index element={<Home />} />
+              <Route path="discover" element={<Discover />} />
+              <Route path="trips" element={<MyTrips />} />
+              <Route path="trips/new" element={<CreateTrip />} />
+              <Route path="trips/:id" element={<ClientTripDetails />} />
+              <Route path="trips/:id/builder" element={<ItineraryBuilder />} />
+              <Route path="profile" element={<Profile />} />
+            </Route>
 
-          {/* Admin Routes */}
+            {/* Admin Routes */}
           <Route path="/admin/login" element={<Login />} />
           
           <Route path="/admin" element={<AdminLayout />}>
@@ -53,8 +71,9 @@ function App() {
             <Route path="notifications" element={<Notifications />} />
             <Route path="settings" element={<Settings />} />
           </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+      </ClientProvider>
     </AdminProvider>
   );
 }
