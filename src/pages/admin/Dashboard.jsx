@@ -11,9 +11,12 @@ import { recentUsers } from '../../data/users';
 import { recentTrips } from '../../data/trips';
 import { downloadCSV } from '../../utils/exportUtils';
 
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
   const userColumns = [
     { 
       header: 'User', 
@@ -153,7 +156,7 @@ const Dashboard = () => {
         <div className="card trending-destinations">
           <div className="card-header">
             <h3>Trending Destinations</h3>
-            <button className="btn-secondary">View All</button>
+            <button className="btn-secondary" onClick={() => navigate('/admin/destinations')}>View All</button>
           </div>
           <div className="destinations-list">
             {trendingDestinations.map((dest, idx) => (
@@ -183,6 +186,7 @@ const Dashboard = () => {
               { header: 'Rating', accessor: 'rating', render: (row) => <span>⭐ {row.rating}</span> }
             ]}
             data={popularActivities}
+            onViewAll={() => navigate('/admin/activities')}
           />
         </div>
       </div>
@@ -193,6 +197,7 @@ const Dashboard = () => {
           title="Recent Users"
           columns={userColumns}
           data={recentUsers}
+          onViewAll={() => navigate('/admin/users')}
         />
         <div className="card health-widget">
           <div className="card-header">
@@ -222,6 +227,7 @@ const Dashboard = () => {
           title="Recent Trips"
           columns={tripColumns}
           data={recentTrips}
+          onViewAll={() => navigate('/admin/trips')}
         />
       </div>
 

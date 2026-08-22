@@ -1,23 +1,33 @@
+import { useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import './ChartCard.css';
 
 const ChartCard = ({ title, data, dataKeys, colors, height = 300 }) => {
+  const [timeframe, setTimeframe] = useState('7D');
+
+  // data should be an object with keys: 7D, 30D, 90D, 1Y
+  const chartData = data[timeframe] || data['7D'] || [];
+
   return (
     <div className="card chart-card">
       <div className="chart-header">
         <h3 className="chart-title">{title}</h3>
         <div className="chart-controls">
-          <select className="chart-select">
-            <option>7D</option>
-            <option>30D</option>
-            <option>90D</option>
-            <option>1Y</option>
+          <select 
+            className="chart-select" 
+            value={timeframe} 
+            onChange={(e) => setTimeframe(e.target.value)}
+          >
+            <option value="7D">7D</option>
+            <option value="30D">30D</option>
+            <option value="90D">90D</option>
+            <option value="1Y">1Y</option>
           </select>
         </div>
       </div>
       <div className="chart-container" style={{ height }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+          <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
               {dataKeys.map((key, index) => (
                 <linearGradient key={key} id={`color${key}`} x1="0" y1="0" x2="0" y2="1">

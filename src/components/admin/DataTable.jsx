@@ -27,12 +27,12 @@ const StatusBadge = ({ status }) => {
   );
 };
 
-const DataTable = ({ title, columns, data, onActionClick }) => {
+const DataTable = ({ title, columns, data, onActionClick, onViewAll }) => {
   return (
     <div className="card data-table-card">
       <div className="table-header">
         <h3 className="table-title">{title}</h3>
-        <button className="btn-secondary">View All</button>
+        {onViewAll && <button className="btn-secondary" onClick={onViewAll}>View All</button>}
       </div>
       
       <div className="table-responsive">
