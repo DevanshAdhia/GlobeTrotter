@@ -87,7 +87,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar, isMobile, closeMobileSidebar }) =
                   <li key={itemIdx} className="nav-item">
                     <NavLink 
                       to={item.path} 
-                      className={({ isActive }) => `nav-link ${isActive && item.path === '/admin' ? 'active' : ''}`}
+                      className={({ isActive }) => `sidebar-nav-link ${isActive ? 'active' : ''}`}
                       end={item.path === '/admin'}
                       title={isCollapsed ? item.label : undefined}
                       onClick={isMobile ? closeMobileSidebar : undefined}

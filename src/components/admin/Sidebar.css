@@ -107,7 +107,7 @@
   gap: 0.25rem;
 }
 
-.nav-link {
+.sidebar-nav-link {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -116,24 +116,26 @@
   color: var(--text-secondary);
   font-weight: 500;
   font-size: 0.875rem;
+  text-decoration: none;
+  transition: all var(--transition-fast);
 }
 
-.admin-sidebar.collapsed .nav-link {
+.sidebar-nav-link:hover {
+  background-color: var(--surface);
+  color: var(--text-primary);
+}
+
+.admin-sidebar.collapsed .sidebar-nav-link {
   justify-content: center;
   padding: 0.75rem;
 }
 
-.nav-link:hover {
-  background-color: var(--background);
-  color: var(--text-primary);
-}
-
-.nav-link.active {
+.sidebar-nav-link.active {
   background-color: var(--primary);
   color: white;
 }
 
-.nav-link.active .nav-icon {
+.sidebar-nav-link.active .nav-icon {
   color: white;
 }
 
