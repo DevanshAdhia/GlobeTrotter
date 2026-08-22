@@ -103,3 +103,139 @@ input, select { font-family: var(--font-sans); outline: none; }
 ::-webkit-scrollbar-thumb { background: var(--color-text-tertiary); border-radius: 99px; }
 
 .container { max-width: 1400px; margin: 0 auto; width: 100%; padding: 0 var(--space-6); }
+
+/* Force search input fields to respect icon padding against Bootstrap CSS resets */
+html body input.search-input-field,
+html body select.search-input-field {
+  padding-left: 2.75rem !important;
+  padding-right: 2rem !important;
+  height: 48px !important;
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+}
+
+html body input[type="date"].search-input-field {
+  padding-left: 2.75rem !important;
+  padding-right: 0.5rem !important;
+  height: 48px !important;
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+}
+
+/* Force search tab buttons against Bootstrap overrides */
+html body button.search-tab-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.5rem !important;
+  padding: 0.5rem 1.25rem !important;
+  border-radius: 0.75rem !important;
+  font-size: 0.875rem !important;
+  font-weight: 800 !important;
+  border: none !important;
+  outline: none !important;
+  transition: all 0.2s ease !important;
+}
+
+html body button.search-tab-button-active {
+  background-color: #0047b3 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(0, 71, 179, 0.25) !important;
+}
+
+html body button.search-tab-button-inactive {
+  background-color: transparent !important;
+  color: #475569 !important;
+}
+
+html body button.search-tab-button-inactive:hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* Force filter pill buttons against Bootstrap resets */
+html body button.filter-pill-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.375rem !important;
+  padding: 0.45rem 0.95rem !important;
+  border-radius: 9999px !important;
+  font-size: 0.8125rem !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+}
+
+html body button.filter-pill-active {
+  background-color: #0047b3 !important;
+  color: #ffffff !important;
+  border: 1px solid #0047b3 !important;
+  box-shadow: 0 4px 12px rgba(0, 71, 179, 0.22) !important;
+  transform: translateY(-1px) !important;
+}
+
+html body button.filter-pill-inactive {
+  background-color: #f8fafc !important;
+  color: #334155 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+html body button.filter-pill-inactive:hover {
+  background-color: #ffffff !important;
+  color: #0047b3 !important;
+  border-color: #93c5fd !important;
+  box-shadow: 0 2px 8px rgba(0, 71, 179, 0.08) !important;
+}
+
+/* Force Travel CTA Buttons against Bootstrap resets */
+html body a.cta-btn-primary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.625rem !important;
+  padding: 0.95rem 2.25rem !important;
+  border-radius: 1rem !important;
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+  background-color: #ffffff !important;
+  color: #002b5e !important;
+  text-decoration: none !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.3s ease !important;
+}
+
+html body a.cta-btn-primary:hover {
+  background-color: #fde047 !important;
+  color: #001d42 !important;
+  border-color: #fde047 !important;
+  box-shadow: 0 14px 30px rgba(253, 224, 71, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+html body a.cta-btn-secondary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.625rem !important;
+  padding: 0.95rem 2.25rem !important;
+  border-radius: 1rem !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  backdrop-filter: blur(12px) !important;
+  transition: all 0.3s ease !important;
+}
+
+html body a.cta-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.22) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+}

@@ -14,13 +14,19 @@ const DestinationHighlights = ({ highlights }) => {
         {highlights.map((item, i) => {
           const Icon = iconMap[item.icon] || CheckCircle;
           return (
-            <motion.div key={item.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-              className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+            <motion.div 
+              key={item.id || item.title || i} 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ delay: i * 0.1 }}
+              className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+            >
               <div className="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-4">
                 <Icon className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+              <p className="text-gray-600 text-sm leading-relaxed">{item.desc || item.description}</p>
             </motion.div>
           );
         })}
@@ -28,4 +34,5 @@ const DestinationHighlights = ({ highlights }) => {
     </section>
   );
 };
+
 export default DestinationHighlights;

@@ -8,10 +8,10 @@ const ImageSlider = ({ images, alt, className = '' }) => {
 
   // If only one image or a string is passed, wrap it and we just won't show arrows
   const imgArray = Array.isArray(images) && images.length > 0 
-    ? images 
-    : typeof images === 'string' 
-      ? [images, 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800', 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800'] 
-      : [];
+    ? images.filter(Boolean)
+    : typeof images === 'string' && images.trim() !== ''
+      ? [images] 
+      : ['https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800'];
 
   const slideNext = (e) => {
     e.preventDefault();
