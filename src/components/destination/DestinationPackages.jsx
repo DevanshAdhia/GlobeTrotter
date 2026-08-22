@@ -8,7 +8,7 @@ const DestinationPackages = ({ packages, destinationName, destinationSlug }) => 
   const [sortOrder, setSortOrder] = useState('recommended');
 
   const filteredAndSortedPackages = useMemo(() => {
-    let result = packages;
+    let result = packages || [];
     
     // Filter
     if (filterStyle !== 'All') {
@@ -17,12 +17,15 @@ const DestinationPackages = ({ packages, destinationName, destinationSlug }) => 
     
     // Sort
     return [...result].sort((a, b) => {
-      if (sortOrder === 'price-asc') return a.startingPrice - b.startingPrice;
-      if (sortOrder === 'price-desc') return b.startingPrice - a.startingPrice;
-      if (sortOrder === 'highest-rated') return b.rating - a.rating;
-      if (sortOrder === 'shortest') return a.nights - b.nights;
-      if (sortOrder === 'longest') return b.nights - a.nights;
-      return 0; // recommended (default order from data)
+      const priceA = a.startingPrice || a.price || 0;
+      const priceB = b.startingPrice || b.price || 0;
+      const ratingA = a.rating || 0;
+      const ratingB = b.rating || 0;
+
+      if (sortOrder === 'price-asc') return priceA - priceB;
+      if (sortOrder === 'price-desc') return priceB - priceA;
+      if (sortOrder === 'highest-rated') return ratingB - ratingA;
+      return 0;
     });
   }, [packages, filterStyle, sortOrder]);
 
@@ -32,7 +35,7 @@ const DestinationPackages = ({ packages, destinationName, destinationSlug }) => 
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Explore Packages</h2>
         <div className="bg-gray-50 rounded-2xl p-8 text-center border border-gray-100">
           <PackageSearch className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-          <p className="text-gray-700 font-medium mb-2">Packages are currently being updated.</p>
+          <p className="text-gray-700 font-medium mb-2">Packages are currently being updated for {destinationName}.</p>
           <Link to={`/contact?destination=${destinationSlug}`} className="text-primary hover:underline font-medium">
             Talk to an Expert for Custom Packages
           </Link>
@@ -67,8 +70,6 @@ const DestinationPackages = ({ packages, destinationName, destinationSlug }) => 
             <option value="recommended">Recommended</option>
             <option value="price-asc">Price: Low to High</option>
             <option value="price-desc">Price: High to Low</option>
-            <option value="shortest">Duration: Shortest</option>
-            <option value="longest">Duration: Longest</option>
             <option value="highest-rated">Highest Rated</option>
           </select>
         </div>
@@ -76,8 +77,8 @@ const DestinationPackages = ({ packages, destinationName, destinationSlug }) => 
 
       {filteredAndSortedPackages.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredAndSortedPackages.map((pkg) => (
-            <DestinationPackageCard key={pkg.id} pkg={pkg} />
+          {filteredAndSortedPackages.map((pkg, idx) => (
+            <DestinationPackageCard key={pkg.id || pkg.slug || idx} pkg={pkg} />
           ))}
         </div>
       ) : (
@@ -89,4 +90,5 @@ const DestinationPackages = ({ packages, destinationName, destinationSlug }) => 
     </section>
   );
 };
+
 export default DestinationPackages;

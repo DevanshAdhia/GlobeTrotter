@@ -28,7 +28,7 @@ const PackageStickyCTA = ({ pkg, adults, children, date }) => {
               <span className="font-bold text-gray-900 text-lg leading-none">{pkg.currency}{estimatedPrice.toLocaleString('en-IN')} <span className="text-xs text-gray-500 font-normal">total</span></span>
             </div>
             <Link 
-              to={`/plan-your-trip?package=${pkg.slug}&date=${date}&adults=${adults}&children=${children}`} 
+              to={`/plan-your-trip/${pkg.destinationSlug}/${pkg.slug}?date=${date}&adults=${adults}&children=${children}`} 
               className={`px-6 py-3 rounded-xl font-bold transition-colors whitespace-nowrap shadow-md focus:outline-none ${date ? 'bg-primary hover:bg-primary-dark text-white' : 'bg-gray-800 text-white'}`}
             >
               {date ? 'Plan This Trip' : 'Plan Trip'}
