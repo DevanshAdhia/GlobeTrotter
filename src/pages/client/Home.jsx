@@ -15,8 +15,9 @@ const Home = () => {
         color: 'white', border: 'none', marginBottom: '3rem'
       }}>
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '600px' }}>
+          <div className="hero-badge">AI-Powered Travel Planning</div>
           <h1 style={{ fontSize: '3.5rem', margin: '0 0 1rem 0', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1 }}>
-            Where to next, {currentUser.name}?
+            Where to next{currentUser ? `, ${currentUser.name}` : ''}?
           </h1>
           <p style={{ fontSize: '1.25rem', opacity: 0.9, marginBottom: '2rem' }}>
             Plan, organize, and track your next adventure with GlobeTrotter's intelligent itinerary builder.
@@ -73,7 +74,7 @@ const Home = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
           {trendingDestinations.slice(0, 4).map(dest => (
             <div key={dest.id} className="card" style={{ padding: 0, overflow: 'hidden' }}>
-              <div style={{ height: '150px', backgroundImage: `url(${dest.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+              <div style={{ height: '150px', backgroundImage: `url(${dest.image})`, backgroundSize: 'cover', backgroundPosition: 'center top' }}></div>
               <div style={{ padding: '1rem' }}>
                 <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '1rem' }}>{dest.city}</h4>
                 <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.875rem' }}>{dest.country}</p>

@@ -61,7 +61,7 @@ const DestinationDetails = () => {
           width: '100%', 
           backgroundImage: `url(${dest.image.replace('w=400', 'w=1600')})`, 
           backgroundSize: 'cover', 
-          backgroundPosition: 'center',
+          backgroundPosition: 'center top',
           position: 'relative'
         }}>
           <div style={{

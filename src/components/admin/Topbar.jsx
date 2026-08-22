@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Bell, Menu, Moon, Sun, HelpCircle } from 'lucide-react';
+import { useAdmin } from '../../context/AdminContext';
 import './Topbar.css';
 
 const Topbar = ({ toggleMobileSidebar, openCommandPalette, pageTitle = "Dashboard", breadcrumbs = ["Overview", "Platform Performance"] }) => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const navigate = useNavigate();
+  const { notifications } = useAdmin();
+  const unreadCount = notifications ? notifications.filter(n => !n.read).length : 0;
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -56,7 +59,7 @@ const Topbar = ({ toggleMobileSidebar, openCommandPalette, pageTitle = "Dashboar
           
           <button className="icon-btn notification-btn" title="Notifications" onClick={() => navigate('/admin/notifications')}>
             <Bell size={18} />
-            <span className="notification-badge">3</span>
+            {unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}
           </button>
           
           <div className="topbar-profile" onClick={() => navigate('/admin/settings')} style={{ cursor: 'pointer' }} title="Settings">

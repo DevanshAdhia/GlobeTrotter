@@ -13,6 +13,14 @@ const Profile = () => {
     setIsEditing(false);
   };
 
+  if (!currentUser) {
+    return (
+      <div className="page-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
+        <h2>Please sign in to view your profile.</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="page-container" style={{ maxWidth: '800px', margin: '0 auto', width: '100%', padding: '2rem' }}>
       
@@ -25,7 +33,7 @@ const Profile = () => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
             <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: 'var(--primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', fontWeight: 700 }}>
-              {currentUser.avatar}
+              {currentUser.avatar || currentUser.name?.charAt(0) || 'U'}
             </div>
             <div>
               <h2 style={{ fontSize: '1.5rem', margin: '0 0 0.25rem 0' }}>{currentUser.name}</h2>

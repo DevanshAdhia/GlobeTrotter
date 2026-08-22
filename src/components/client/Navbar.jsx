@@ -32,13 +32,21 @@ const Navbar = () => {
           </button>
           
           <div className="user-menu">
-            <Link to="/profile" className="user-avatar-btn">
-              <div className="navbar-avatar">{currentUser.avatar}</div>
-              <span className="navbar-username">{currentUser.name}</span>
-            </Link>
-            <Link to="/settings" className="settings-btn">
-              <Settings size={18} />
-            </Link>
+            {currentUser ? (
+              <>
+                <Link to="/profile" className="user-avatar-btn">
+                  <div className="navbar-avatar">{currentUser.avatar || currentUser.name?.charAt(0) || 'U'}</div>
+                  <span className="navbar-username">{currentUser.name}</span>
+                </Link>
+                <Link to="/settings" className="settings-btn">
+                  <Settings size={18} />
+                </Link>
+              </>
+            ) : (
+              <Link to="/login" className="btn-primary" style={{ padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none' }}>
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
       </div>
