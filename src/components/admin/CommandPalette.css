@@ -1,0 +1,103 @@
+.palette-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 10vh;
+}
+
+.palette-modal {
+  width: 100%;
+  max-width: 600px;
+  background-color: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  animation: scaleIn var(--transition-fast);
+}
+
+.palette-search {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.palette-icon {
+  color: var(--text-muted);
+  margin-right: 1rem;
+}
+
+.palette-search input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+}
+
+.palette-esc {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.palette-results {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 1rem 0;
+}
+
+.palette-group-title {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 0 1.5rem 0.5rem;
+  text-transform: uppercase;
+}
+
+.palette-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.palette-item:hover, .palette-item:focus {
+  background-color: var(--background);
+}
+
+.palette-item-icon {
+  color: var(--text-secondary);
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.palette-item-label {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.palette-empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
