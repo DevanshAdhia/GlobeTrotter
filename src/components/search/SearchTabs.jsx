@@ -16,13 +16,11 @@ const SearchTabs = ({ active, onChange }) => {
           key={name} 
           onClick={() => onChange(name)}
           className={clsx(
-            'flex items-center space-x-2 px-5 py-2.5 rounded-xl text-xs md:text-sm font-extrabold transition-all duration-300 select-none cursor-pointer',
-            active === name 
-              ? 'bg-primary text-white shadow-md shadow-primary/20 scale-[1.02]' 
-              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/70'
+            'search-tab-button select-none cursor-pointer',
+            active === name ? 'search-tab-button-active' : 'search-tab-button-inactive'
           )}
         >
-          <Icon className={clsx('w-4 h-4', active === name ? 'text-accent' : 'text-gray-400')} />
+          <Icon className={clsx('w-4 h-4 shrink-0', active === name ? 'text-amber-300' : 'text-gray-400')} />
           <span>{name}</span>
         </button>
       ))}

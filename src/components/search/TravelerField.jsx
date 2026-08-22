@@ -21,7 +21,7 @@ const TravelerField = ({ value, onChange }) => {
           type="text" 
           readOnly 
           value={`${value.adults} Adult${value.adults > 1 ? 's' : ''}${value.children > 0 ? `, ${value.children} Child` : ''}`} 
-          className="w-full pl-11 pr-8 py-3 bg-gray-50/90 hover:bg-gray-100/90 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-gray-900 font-bold text-sm cursor-pointer truncate transition-all shadow-xs" 
+          className="search-input-field w-full bg-gray-50/90 hover:bg-gray-100/90 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-gray-900 cursor-pointer truncate transition-all shadow-xs" 
         />
 
         <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none transition-transform duration-200 group-hover:text-gray-600" />

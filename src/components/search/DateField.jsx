@@ -14,7 +14,7 @@ const DateField = ({ value, onChange }) => {
         <input 
           type="date" 
           onChange={(e) => onChange(e.target.value ? new Date(e.target.value) : null)} 
-          className="w-full pl-11 pr-3 py-3 bg-gray-50/90 hover:bg-gray-100/90 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-gray-900 font-bold text-sm cursor-pointer transition-all shadow-xs" 
+          className="search-input-field w-full bg-gray-50/90 hover:bg-gray-100/90 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-gray-900 cursor-pointer transition-all shadow-xs" 
         />
       </div>
     </div>
