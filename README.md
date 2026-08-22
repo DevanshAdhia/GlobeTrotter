@@ -1,3 +1,14 @@
+# GlobeTrotter Travel Platform
+
+Welcome to the GlobeTrotter repository!
+
+## 🎥 Admin Panel Demo Video
+
+Check out the admin panel walkthrough here:
+[Watch Admin Panel Demo](https://github.com/DevanshAdhia/GlobeTrotter/blob/main/admin_demo.mp4)
+
+---
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
