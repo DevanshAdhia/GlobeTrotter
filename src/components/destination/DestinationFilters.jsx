@@ -47,9 +47,9 @@ const DestinationFilters = ({ activeFilters = {}, onFilterChange, onClearAll }) 
             return (
               <label 
                 key={opt} 
-                className="flex items-center justify-between cursor-pointer group"
+                className="!flex w-full items-center justify-between cursor-pointer group"
               >
-                <div className="flex items-center space-x-3">
+                <div className="!flex items-center space-x-3">
                   <input 
                     type="checkbox" 
                     checked={isSelected}

@@ -1,0 +1,88 @@
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chart-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.chart-select {
+  background-color: var(--background);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+}
+
+.chart-select:focus {
+  border-color: var(--primary);
+}
+
+.chart-container {
+  width: 100%;
+}
+
+.custom-chart-tooltip {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(8px);
+}
+
+[data-theme="dark"] .custom-chart-tooltip {
+  background-color: rgba(30, 41, 59, 0.85);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.tooltip-label {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  font-size: 0.875rem;
+}
+
+.tooltip-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.tooltip-item:last-child {
+  margin-bottom: 0;
+}
+
+.tooltip-color-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.tooltip-name {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.tooltip-value {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-left: auto;
+}

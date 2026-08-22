@@ -35,7 +35,7 @@ const TravellerSelector = ({ adults, setAdults, children, setChildren, infants, 
 
   return (
     <div className="relative flex-1" ref={ref}>
-      <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Travellers</label>
+      <label className="block truncate text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Travellers</label>
       <button type="button" onClick={() => setIsOpen(!isOpen)} className="w-full text-left flex items-center bg-white border border-gray-200 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
         <Users className="w-5 h-5 text-gray-400 mr-2" />
         <span className="text-gray-900 font-medium">{summary}</span>

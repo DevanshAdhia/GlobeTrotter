@@ -19,7 +19,7 @@ const StartingLocation = ({ value, onChange }) => {
 
   return (
     <div className="relative flex-1" ref={ref}>
-      <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Travelling from</label>
+      <label className="block truncate text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Travelling from</label>
       <button type="button" onClick={() => setIsOpen(!isOpen)} className="w-full text-left flex items-center bg-white border border-gray-200 p-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
         <MapPin className="w-5 h-5 text-gray-400 mr-2" />
         <span className={value ? 'text-gray-900 font-medium' : 'text-gray-400'}>{value || 'Select city'}</span>

@@ -12,7 +12,7 @@ const categories = [
     icon: Building2, 
     link: '/domestic-destinations',
     badge: 'Popular',
-    accent: 'from-blue-500 to-cyan-500'
+    image: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?q=80&w=2071&auto=format&fit=crop'
   },
   { 
     id: 'c2', 
@@ -21,7 +21,7 @@ const categories = [
     icon: Plane, 
     link: '/international-destinations',
     badge: 'Trending',
-    accent: 'from-indigo-500 to-purple-500'
+    image: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?q=80&w=2020&auto=format&fit=crop'
   },
   { 
     id: 'c3', 
@@ -30,7 +30,7 @@ const categories = [
     icon: Map, 
     link: '/weekend-gateways',
     badge: 'Quick Escape',
-    accent: 'from-emerald-500 to-teal-500'
+    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2021&auto=format&fit=crop'
   },
   { 
     id: 'c4', 
@@ -39,7 +39,7 @@ const categories = [
     icon: Users, 
     link: '/domestic-destinations',
     badge: 'Best Value',
-    accent: 'from-amber-500 to-orange-500'
+    image: 'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?q=80&w=1974&auto=format&fit=crop'
   },
   { 
     id: 'c5', 
@@ -48,7 +48,7 @@ const categories = [
     icon: Heart, 
     link: '/international-destinations',
     badge: 'Romantic',
-    accent: 'from-rose-500 to-pink-500'
+    image: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=2070&auto=format&fit=crop'
   },
   { 
     id: 'c6', 
@@ -57,7 +57,7 @@ const categories = [
     icon: Palmtree, 
     link: '/domestic-destinations',
     badge: 'Relaxing',
-    accent: 'from-sky-500 to-blue-600'
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2073&auto=format&fit=crop'
   }
 ];
 
@@ -75,40 +75,46 @@ const TravelCategories = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="h-full"
+                className="h-[320px]"
               >
                 <Link 
                   to={cat.link} 
-                  className="group relative flex flex-col justify-between p-6 sm:p-7 bg-white rounded-3xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_35px_rgba(0,71,179,0.1)] hover:border-primary/30 transition-all duration-300 hover:-translate-y-1.5 no-underline h-full"
+                  className="group relative block w-full h-full rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer no-underline"
                 >
-                  {/* Top Accent Line */}
-                  <div className={`absolute top-0 left-6 right-6 h-1 rounded-b-full bg-gradient-to-r ${cat.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-                  <div>
-                    {/* Top Row: Icon & Badge */}
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-100/60 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white group-hover:scale-105 transition-all duration-300 shadow-xs">
-                        <Icon className="w-5 h-5" />
-                      </div>
-
-                      <span className="text-[10px] font-extrabold tracking-wider uppercase px-3 py-1 rounded-full bg-gray-100 text-gray-600 group-hover:bg-primary/10 group-hover:text-primary transition-colors">
-                        {cat.badge}
-                      </span>
-                    </div>
-
-                    {/* Content */}
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors leading-snug">
-                      {cat.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm mb-6 leading-relaxed">
-                      {cat.desc}
-                    </p>
+                  {/* Background Image */}
+                  <img 
+                    src={cat.image} 
+                    alt={cat.title} 
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  
+                  {/* Dark Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#001d42] via-[#003380]/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+                  
+                  {/* Badge */}
+                  <div className="absolute top-5 left-5 z-10">
+                    <span className="text-[10px] font-extrabold tracking-wider uppercase px-4 py-1.5 rounded-full bg-white/95 text-[#003380] shadow-sm backdrop-blur-sm">
+                      {cat.badge}
+                    </span>
                   </div>
 
-                  {/* Bottom Link CTA */}
-                  <div className="flex items-center text-primary font-bold text-sm group-hover:text-primary-dark pt-4 border-t border-gray-100 mt-auto leading-normal">
-                    <span>Explore Packages</span>
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-2" />
+                  {/* Icon floating */}
+                  <div className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 text-white group-hover:bg-primary group-hover:border-primary transition-colors duration-300">
+                    <Icon className="w-5 h-5" />
+                  </div>
+
+                  {/* Content Container (Bottom) */}
+                  <div className="absolute inset-x-0 bottom-0 p-6 z-10 flex flex-col justify-end h-full text-white">
+                    <h3 className="text-2xl font-bold mb-1 transform transition-transform duration-300 group-hover:-translate-y-2 text-white">
+                      {cat.title}
+                    </h3>
+                    <p className="text-white/80 text-sm mb-0 leading-relaxed max-h-0 opacity-0 group-hover:opacity-100 group-hover:max-h-20 group-hover:mb-4 transition-all duration-500 ease-in-out overflow-hidden">
+                      {cat.desc}
+                    </p>
+                    <div className="flex items-center text-accent font-bold text-sm transform transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0">
+                      <span>Explore Packages</span>
+                      <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-2" />
+                    </div>
                   </div>
                 </Link>
               </motion.div>

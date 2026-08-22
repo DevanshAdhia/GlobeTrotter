@@ -54,9 +54,36 @@ const DestinationGallery = ({ images, title }) => {
           </>
         )}
         
-        <button aria-label="View all photos" onClick={() => setLightboxOpen(true)} className="absolute bottom-4 right-4 bg-white/90 backdrop-blur text-gray-900 px-4 py-2 rounded-lg text-sm font-bold flex items-center shadow-sm hover:bg-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+        <button aria-label="View all photos" onClick={() => setLightboxOpen(true)} className="absolute top-4 right-4 bg-white/90 backdrop-blur text-gray-900 px-4 py-2 rounded-lg text-sm font-bold flex items-center shadow-sm hover:bg-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary z-20">
           <Grid2X2 className="w-4 h-4 mr-2" /> View All Photos
         </button>
+
+        {/* Thumbnails overlay */}
+        {images.length > 1 && (
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 px-4 z-20 overflow-x-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+            {images.map((src, i) => (
+              <button
+                key={i}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => emblaApi && emblaApi.scrollTo(i)}
+                className={`relative w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer ${
+                  currentIndex === i 
+                    ? 'border-white scale-110 shadow-[0_0_15px_rgba(0,0,0,0.5)] z-30' 
+                    : 'border-white/40 opacity-60 hover:opacity-100 scale-100 hover:scale-105'
+                }`}
+              >
+                <img src={src} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover" />
+                {currentIndex === i && (
+                  <motion.div 
+                    layoutId="active-thumb-border" 
+                    className="absolute inset-0 border-2 border-primary rounded-lg z-10 pointer-events-none" 
+                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <AnimatePresence>

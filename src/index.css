@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+@import './styles/variables.css';
+@import './styles/admin.css';
+
 @theme {
   --color-primary: var(--color-primary);
   --color-primary-dark: var(--color-primary-dark);
@@ -235,4 +238,14 @@ html body a.cta-btn-secondary:hover {
   border-color: rgba(255, 255, 255, 0.6) !important;
   color: #ffffff !important;
   transform: translateY(-2px) !important;
+}
+
+/* Fix Tailwind vs Bootstrap .collapse conflict */
+.navbar-collapse {
+  visibility: visible !important;
+}
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+  }
 }

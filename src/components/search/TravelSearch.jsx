@@ -33,7 +33,7 @@ const TravelSearch = () => {
   };
 
   return (
-    <div className="relative -mt-16 sm:-mt-20 z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+    <div className="relative -mt-10 sm:-mt-14 z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
       <motion.div 
         initial={{ opacity: 0, y: 25 }} 
         animate={{ opacity: 1, y: 0 }} 
