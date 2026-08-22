@@ -9,19 +9,42 @@
 .dashboard-hero {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1rem;
+  align-items: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--info) 100%);
+  border-radius: var(--radius-xl);
+  color: white;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-content h2 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
-  color: var(--text-primary);
+  color: white;
 }
 
 .hero-content p {
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.8);
   margin: 0;
+  font-size: 1rem;
 }
 
 .hero-actions {
@@ -31,15 +54,33 @@
 }
 
 .date-filter {
-  background-color: var(--surface);
-  color: var(--text-primary);
-  border: 1px solid var(--border);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 0.5rem 1rem;
   border-radius: var(--radius-md);
   font-size: 0.875rem;
   font-weight: 500;
   outline: none;
   cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.date-filter option {
+  color: var(--text-primary);
+  background: var(--surface);
+}
+
+.hero-actions .btn-primary {
+  background-color: white;
+  color: var(--primary);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.hero-actions .btn-primary:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .flex-center {

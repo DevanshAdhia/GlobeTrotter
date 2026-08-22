@@ -13,19 +13,15 @@ const KpiCard = ({ title, value, trend, isPositive, label, icon: Icon }) => {
   const color = getSubtleColor();
 
   return (
-    <div className="card kpi-card" style={{ position: 'relative', overflow: 'hidden' }}>
-      <div style={{
-        position: 'absolute',
-        top: '-20px',
-        right: '-20px',
-        width: '120px',
-        height: '120px',
-        background: `radial-gradient(circle, ${color}25 0%, transparent 70%)`,
-        borderRadius: '50%',
-        zIndex: 0
-      }}></div>
+    <div className="card kpi-card">
+      <div 
+        className="kpi-glow-bg"
+        style={{
+          background: `radial-gradient(circle, ${color}30 0%, transparent 70%)`
+        }}
+      ></div>
 
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      <div style={{ position: 'relative', zIndex: 3 }}>
         <div className="kpi-header">
           <h3 className="kpi-title">{title}</h3>
           <div className="kpi-icon-wrapper" style={{ color: color, backgroundColor: `${color}15`, padding: '8px', borderRadius: '8px' }}>
