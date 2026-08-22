@@ -31,14 +31,18 @@ export const downloadCSV = (data, filename) => {
   }
   
   const csvString = csvRows.join('\n');
-  const encodedUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvString);
+  const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
   
   const link = document.createElement('a');
-  link.setAttribute('href', encodedUri);
+  link.setAttribute('href', url);
   link.setAttribute('download', `${filename}.csv`);
   link.style.display = 'none';
   
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+  
+  // Clean up to avoid memory leaks
+  setTimeout(() => URL.revokeObjectURL(url), 100);
 };

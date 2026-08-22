@@ -11,11 +11,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--info) 100%);
+  background-color: var(--surface);
   border-radius: var(--radius-xl);
-  color: white;
+  border: 1px solid var(--border);
   margin-bottom: 2rem;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
 }
@@ -23,10 +23,10 @@
 .dashboard-hero::before {
   content: '';
   position: absolute;
-  top: -50%; right: -10%;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-  border-radius: 50%;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--primary);
+  border-radius: 4px 0 0 4px;
 }
 
 .hero-content {
@@ -37,12 +37,12 @@
 .hero-content h2 {
   font-size: 1.75rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: white;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
 }
 
 .hero-content p {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
   margin: 0;
   font-size: 1rem;
 }
@@ -54,16 +54,20 @@
 }
 
 .date-filter {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: var(--background);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
   padding: 0.5rem 1rem;
   border-radius: var(--radius-md);
   font-size: 0.875rem;
   font-weight: 500;
   outline: none;
   cursor: pointer;
-  backdrop-filter: blur(10px);
+  transition: all var(--transition-fast);
+}
+
+.date-filter:focus {
+  border-color: var(--primary);
 }
 
 .date-filter option {
@@ -72,15 +76,15 @@
 }
 
 .hero-actions .btn-primary {
-  background-color: white;
-  color: var(--primary);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  background-color: var(--primary);
+  color: white;
+  box-shadow: var(--shadow-sm);
 }
 
 .hero-actions .btn-primary:hover {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-md);
 }
 
 .flex-center {
@@ -162,6 +166,8 @@
   height: 48px;
   border-radius: var(--radius-sm);
   object-fit: cover;
+  object-position: center;
+  border: 1px solid var(--border);
 }
 
 .dest-info {

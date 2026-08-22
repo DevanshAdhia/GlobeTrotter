@@ -99,36 +99,10 @@ button {
   z-index: 1;
 }
 
-/* Premium top highlight effect on hover */
-.card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--info), var(--success));
-  background-size: 200% auto;
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-  z-index: 2;
-  animation: gradient-shift 3s ease infinite;
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 .card:hover {
   box-shadow: var(--shadow-hover);
-  transform: translateY(-6px) scale(1.01);
+  transform: translateY(-4px) scale(1.005);
   border-color: rgba(79, 70, 229, 0.3);
-}
-
-.card:hover::after {
-  opacity: 1;
 }
 
 .btn-primary {
