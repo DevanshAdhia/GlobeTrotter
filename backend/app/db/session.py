@@ -8,14 +8,16 @@ if os.getenv("TESTING") == "1":
     engine = create_async_engine(
         settings.DATABASE_URL,
         poolclass=NullPool,
-        echo=settings.DEBUG,
+        echo=False,
         future=True,
     )
+
 else:
     engine = create_async_engine(
         settings.DATABASE_URL,
-        pool_size=settings.DB_POOL_SIZE if not settings.is_development else 10,
+        pool_size=settings.DB_POOL_SIZE,
         max_overflow=settings.DB_MAX_OVERFLOW,
+
         pool_pre_ping=True,
         echo=settings.DEBUG,
         future=True,
