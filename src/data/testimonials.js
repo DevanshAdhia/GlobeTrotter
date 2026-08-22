@@ -1,0 +1,7 @@
+export const testimonials = [
+  { id: 't-1', name: 'Rahul Sharma', trip: 'Kashmir Trip', rating: 5, text: 'Everything was perfectly planned. The trip was smooth from start to finish. Highly recommend Ajay Modi Travels for domestic tours!', avatar: 'https://ui-avatars.com/api/?name=Rahul+Sharma&background=0D8ABC&color=fff' },
+  { id: 't-2', name: 'Priya Patel', trip: 'Dubai Extravaganza', rating: 5, text: 'Amazing experience! The hotels were breathtaking and the local guides were very supportive throughout the journey.', avatar: 'https://ui-avatars.com/api/?name=Priya+Patel&background=F59E0B&color=fff' },
+  { id: 't-3', name: 'Amit Kumar', trip: 'Kerala Backwaters', rating: 4, text: 'A truly relaxing experience. The houseboat stay was the highlight of our vacation. Well organized.', avatar: 'https://ui-avatars.com/api/?name=Amit+Kumar&background=10B981&color=fff' },
+  { id: 't-4', name: 'Sneha Gupta', trip: 'Bali Honeymoon', rating: 5, text: 'Our honeymoon was perfectly magical. Every detail was taken care of, allowing us to just relax and enjoy.', avatar: 'https://ui-avatars.com/api/?name=Sneha+Gupta&background=EC4899&color=fff' },
+  { id: 't-5', name: 'Vikram Singh', trip: 'Singapore Safari', rating: 5, text: 'Great family trip. The itinerary was well balanced with activities for kids and relaxation for adults.', avatar: 'https://ui-avatars.com/api/?name=Vikram+Singh&background=8B5CF6&color=fff' }
+];

@@ -1,0 +1,29 @@
+/* ProgressBar.module.css */
+.container { display: flex; flex-direction: column; gap: 6px; }
+.meta { display: flex; justify-content: space-between; align-items: center; }
+.label { font-size: var(--text-sm); color: var(--color-text-secondary); font-weight: 500; }
+.pct   { font-size: var(--text-sm); color: var(--color-text-primary); font-weight: 600; }
+
+.track {
+  width: 100%;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.track-xs { height: 4px; }
+.track-sm { height: 6px; }
+.track-md { height: 8px; }
+.track-lg { height: 12px; }
+
+.fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fill-primary { background: var(--color-primary); }
+.fill-success { background: var(--color-success); }
+.fill-warning { background: var(--color-warning); }
+.fill-error   { background: var(--color-error); }
+.fill-gradient {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
