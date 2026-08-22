@@ -96,17 +96,22 @@ const HeroSection = () => {
             key={i}
             aria-label={`Go to slide ${i + 1}`}
             onClick={() => emblaApi && emblaApi.scrollTo(i)}
-            className={`relative w-16 h-12 sm:w-20 sm:h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer ${
+            className={`relative w-16 h-12 sm:w-20 sm:h-14 transition-all duration-300 cursor-pointer ${
               currentIndex === i 
-                ? 'border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.4)] z-30' 
-                : 'border-white/30 opacity-60 hover:opacity-100 scale-100'
+                ? 'scale-110 z-30' 
+                : 'opacity-60 hover:opacity-100 scale-100'
             }`}
           >
-            <img src={src} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover" />
+            <div className={`w-full h-full rounded-lg overflow-hidden border-2 relative z-0 ${
+              currentIndex === i ? 'border-transparent shadow-[0_0_15px_rgba(255,255,255,0.4)]' : 'border-white/30'
+            }`}>
+              <img src={src} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover" />
+            </div>
+            
             {currentIndex === i && (
               <motion.div 
                 layoutId="home-active-thumb" 
-                className="absolute inset-0 border-2 border-primary rounded-lg z-10 pointer-events-none" 
+                className="absolute inset-[-2px] border-[3px] border-[#00aaff] rounded-xl z-10 pointer-events-none" 
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               />
             )}

@@ -38,10 +38,10 @@ const Topbar = () => {
           {/* LOGO */}
           <Navbar.Brand as={Link} to="/" className="d-flex align-items-end gap-1 me-lg-5">
             <div className="font-extrabold tracking-tight leading-none" style={{ color: '#002b5e', fontSize: '1.5rem', fontWeight: 800 }}>
-              <span style={{ fontSize: '2rem' }}>A</span>jay Modi
+              <span style={{ fontSize: '2rem' }}>I</span>nfinity
             </div>
             <div className="d-flex flex-column ms-1 leading-none mb-1">
-              <span style={{ color: '#002b5e', fontSize: '10px', fontWeight: 'bold', letterSpacing: '2px' }}>TRAVELS</span>
+              <span style={{ color: '#002b5e', fontSize: '10px', fontWeight: 'bold', letterSpacing: '2px' }}>TRAVEL</span>
               <span className="text-muted" style={{ fontSize: '6px', letterSpacing: '1px' }}>Dream. Travel. Explore.</span>
             </div>
           </Navbar.Brand>
