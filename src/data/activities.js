@@ -1,52 +1,56 @@
-export const popularActivities = [
+export const activities = [
   {
-    id: 1,
-    activity: "Baga Beach Water Sports",
-    destination: "Goa",
+    id: "sunset-cruise",
+    destinationSlug: "goa",
+    name: "Sunset Cruise",
+    category: "Experience",
+    image: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?q=80&w=800&auto=format&fit=crop",
+    duration: "2 Hours",
+    price: 1500
+  },
+  {
+    id: "water-sports",
+    destinationSlug: "goa",
+    name: "Water Sports Combo",
     category: "Adventure",
-    searches: "12,420",
-    addedToTrips: "8,240",
-    rating: "4.8",
-    trend: "+22%"
+    image: "https://images.unsplash.com/photo-1544181829-170ccf026a79?q=80&w=800&auto=format&fit=crop",
+    duration: "3 Hours",
+    price: 2500
   },
   {
-    id: 2,
-    activity: "Amber Fort Tour",
-    destination: "Jaipur",
-    category: "History",
-    searches: "10,120",
-    addedToTrips: "7,150",
-    rating: "4.9",
-    trend: "+18%"
-  },
-  {
-    id: 3,
-    activity: "Backwaters Houseboat",
-    destination: "Kerala",
-    category: "Nature",
-    searches: "9,450",
-    addedToTrips: "6,800",
-    rating: "4.7",
-    trend: "+15%"
-  },
-  {
-    id: 4,
-    activity: "Rohtang Pass Snow Trek",
-    destination: "Manali",
+    id: "scuba-diving",
+    destinationSlug: "goa",
+    name: "Scuba Diving",
     category: "Adventure",
-    searches: "8,900",
-    addedToTrips: "5,920",
-    rating: "4.6",
-    trend: "+10%"
+    image: "https://images.unsplash.com/photo-1544181829-170ccf026a79?q=80&w=800&auto=format&fit=crop",
+    duration: "Half Day",
+    price: 3500
   },
   {
-    id: 5,
-    activity: "City Palace Sunset Boat Ride",
-    destination: "Udaipur",
-    category: "Sightseeing",
-    searches: "7,800",
-    addedToTrips: "5,100",
-    rating: "4.5",
-    trend: "+14%"
+    id: "shikara-ride",
+    destinationSlug: "kashmir",
+    name: "Shikara Ride",
+    category: "Experience",
+    image: "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?q=80&w=800&auto=format&fit=crop",
+    duration: "1 Hour",
+    price: 800
+  },
+  {
+    id: "gondola-ride",
+    destinationSlug: "kashmir",
+    name: "Gulmarg Gondola Ride",
+    category: "Experience",
+    image: "https://images.unsplash.com/photo-1580211110091-a67b4b123616?q=80&w=800&auto=format&fit=crop",
+    duration: "2 Hours",
+    price: 1800
+  },
+  {
+    id: "desert-safari",
+    destinationSlug: "dubai",
+    name: "Desert Safari",
+    category: "Adventure",
+    image: "https://images.unsplash.com/photo-1451337516015-6b6e9a44a8a3?q=80&w=800&auto=format&fit=crop",
+    duration: "6 Hours",
+    price: 4500
   }
 ];

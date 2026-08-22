@@ -1,0 +1,149 @@
+/* Topbar.module.css */
+.header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+.logoIcon {
+  font-size: 32px;
+}
+.logoText {
+  display: flex;
+  flex-direction: column;
+}
+.brandName {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  line-height: 1.1;
+}
+.tagline {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.navLink {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.navLink:hover, .navLink.active {
+  color: var(--color-primary);
+}
+.navLink::after { /* Dropdown arrow simulation for some */
+  content: '▼';
+  font-size: 8px;
+  color: var(--color-text-tertiary);
+  margin-top: 2px;
+}
+.navLink:last-child::after, .navLink:nth-last-child(2):after, .navLink:first-child::after {
+  content: ''; /* Remove arrow from some links to match image */
+  display: none;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.phoneIcon {
+  width: 36px;
+  height: 36px;
+  background: var(--color-border-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--color-text-primary);
+}
+.contactText {
+  display: flex;
+  flex-direction: column;
+}
+.phone {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-text-primary);
+}
+.talk {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.enquireBtn {
+  border-radius: var(--radius-full) !important;
+  padding: 10px 24px !important;
+  font-weight: 600;
+  background-color: var(--color-success) !important;
+}
+
+.userProfileBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.userProfileBtn:hover {
+  background: var(--color-border-light);
+}
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.userName {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+.dropdownIcon {
+  font-size: 10px;
+  color: var(--color-text-tertiary);
+}
+
+@media (max-width: 1024px) {
+  .nav { display: none; }
+  .contact { display: none; }
+  .userName, .dropdownIcon { display: none; }
+}
