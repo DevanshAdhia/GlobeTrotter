@@ -11,11 +11,15 @@ import { recentUsers } from '../../data/users';
 import { recentTrips } from '../../data/trips';
 import { downloadCSV } from '../../utils/exportUtils';
 
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [globalTimeframe, setGlobalTimeframe] = useState('30D');
+
+  const currentKpis = kpiData[globalTimeframe] || kpiData['30D'];
 
   const userColumns = [
     { 
@@ -63,15 +67,18 @@ const Dashboard = () => {
           <p>Here's what's happening across GlobeTrotter today.</p>
         </div>
         <div className="hero-actions">
-          <select className="date-filter">
-            <option>Today</option>
-            <option>Last 7 Days</option>
-            <option>Last 30 Days</option>
-            <option>Last 90 Days</option>
-            <option>Custom</option>
+          <select 
+            className="date-filter" 
+            value={globalTimeframe}
+            onChange={(e) => setGlobalTimeframe(e.target.value)}
+          >
+            <option value="7D">Last 7 Days</option>
+            <option value="30D">Last 30 Days</option>
+            <option value="90D">Last 90 Days</option>
+            <option value="1Y">Last Year</option>
           </select>
           <button className="btn-primary flex-center gap-sm" onClick={() => {
-            const reportData = Object.entries(kpiData).map(([key, data]) => ({
+            const reportData = Object.entries(currentKpis).map(([key, data]) => ({
               Metric: data.label || key,
               Value: data.value,
               Trend: data.trend
@@ -87,50 +94,50 @@ const Dashboard = () => {
       <div className="kpi-grid">
         <KpiCard 
           title="Total Users" 
-          value={kpiData.totalUsers.value} 
-          trend={kpiData.totalUsers.trend}
-          isPositive={kpiData.totalUsers.isPositive}
-          label={kpiData.totalUsers.label}
+          value={currentKpis.totalUsers.value} 
+          trend={currentKpis.totalUsers.trend}
+          isPositive={currentKpis.totalUsers.isPositive}
+          label={currentKpis.totalUsers.label}
           icon={Users} 
         />
         <KpiCard 
           title="Active Trips" 
-          value={kpiData.activeTrips.value} 
-          trend={kpiData.activeTrips.trend}
-          isPositive={kpiData.activeTrips.isPositive}
-          label={kpiData.activeTrips.label}
+          value={currentKpis.activeTrips.value} 
+          trend={currentKpis.activeTrips.trend}
+          isPositive={currentKpis.activeTrips.isPositive}
+          label={currentKpis.activeTrips.label}
           icon={Map} 
         />
         <KpiCard 
           title="Trips Created" 
-          value={kpiData.tripsCreated.value} 
-          trend={kpiData.tripsCreated.trend}
-          isPositive={kpiData.tripsCreated.isPositive}
-          label={kpiData.tripsCreated.label}
+          value={currentKpis.tripsCreated.value} 
+          trend={currentKpis.tripsCreated.trend}
+          isPositive={currentKpis.tripsCreated.isPositive}
+          label={currentKpis.tripsCreated.label}
           icon={PlusCircle} 
         />
         <KpiCard 
           title="Public Trips" 
-          value={kpiData.publicTrips.value} 
-          trend={kpiData.publicTrips.trend}
-          isPositive={kpiData.publicTrips.isPositive}
-          label={kpiData.publicTrips.label}
+          value={currentKpis.publicTrips.value} 
+          trend={currentKpis.publicTrips.trend}
+          isPositive={currentKpis.publicTrips.isPositive}
+          label={currentKpis.publicTrips.label}
           icon={Globe2} 
         />
         <KpiCard 
           title="Destinations" 
-          value={kpiData.destinations.value} 
-          trend={kpiData.destinations.trend}
-          isPositive={kpiData.destinations.isPositive}
-          label={kpiData.destinations.label}
+          value={currentKpis.destinations.value} 
+          trend={currentKpis.destinations.trend}
+          isPositive={currentKpis.destinations.isPositive}
+          label={currentKpis.destinations.label}
           icon={MapPin} 
         />
         <KpiCard 
           title="Activities" 
-          value={kpiData.activities.value} 
-          trend={kpiData.activities.trend}
-          isPositive={kpiData.activities.isPositive}
-          label={kpiData.activities.label}
+          value={currentKpis.activities.value} 
+          trend={currentKpis.activities.trend}
+          isPositive={currentKpis.activities.isPositive}
+          label={currentKpis.activities.label}
           icon={Activity} 
         />
       </div>
@@ -142,12 +149,14 @@ const Dashboard = () => {
           data={userGrowthData} 
           dataKeys={['activeUsers', 'newUsers']} 
           colors={['var(--primary)', 'var(--success)']}
+          defaultTimeframe={globalTimeframe}
         />
         <ChartCard 
           title="Trip Activity" 
           data={tripActivityData} 
           dataKeys={['created', 'completed']} 
           colors={['var(--info)', 'var(--warning)']}
+          defaultTimeframe={globalTimeframe}
         />
       </div>
 

@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import './ChartCard.css';
 
-const ChartCard = ({ title, data, dataKeys, colors, height = 300 }) => {
-  const [timeframe, setTimeframe] = useState('7D');
+const ChartCard = ({ title, data, dataKeys, colors, height = 300, defaultTimeframe = '7D' }) => {
+  const [timeframe, setTimeframe] = useState(defaultTimeframe);
+
+  useEffect(() => {
+    setTimeframe(defaultTimeframe);
+  }, [defaultTimeframe]);
 
   const isArrayData = Array.isArray(data);
   const chartData = isArrayData ? data : (data[timeframe] || data['7D'] || []);
