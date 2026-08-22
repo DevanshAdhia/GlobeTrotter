@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { Menu, X, Star, MapPin, Users, Clock, Phone, Search, ChevronDown, Facebook, Instagram, Twitter } from 'lucide-react';
-import './Topbar.css'; // Optional custom CSS if needed
-
 const Topbar = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
