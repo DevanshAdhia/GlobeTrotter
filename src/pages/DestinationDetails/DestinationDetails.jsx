@@ -41,54 +41,59 @@ const DestinationDetails = () => {
 
     const timer = setTimeout(() => {
       try {
-        // 1. Try finding in destinations.js
-        let found = destinations.find(d => d.slug?.toLowerCase() === slug?.toLowerCase());
+        let found = null;
         
-        // 2. Try finding in internationalDestinations.js
-        if (!found) {
-          const intl = internationalDestinations.find(d => d.slug?.toLowerCase() === slug?.toLowerCase());
-          if (intl) {
+        // Check combined destinations (destinations.js usually holds basic lists)
+        const basicMatch = destinations.find(d => d.slug?.toLowerCase() === slug?.toLowerCase());
+        
+        // Check international
+        const intl = internationalDestinations.find(d => d.slug?.toLowerCase() === slug?.toLowerCase());
+        // Check domestic
+        const dom = domesticDestinations.find(d => d.slug?.toLowerCase() === slug?.toLowerCase());
+
+        const sourceMatch = intl || dom || basicMatch;
+
+        if (sourceMatch) {
+          // If the match doesn't have rich data, generate it
+          const isRich = !!sourceMatch.overview && !!sourceMatch.highlights;
+          
+          if (isRich) {
+            found = sourceMatch;
+          } else {
+            // Enhance basic data with rich fallback structure to maintain page layout
+            const formattedName = sourceMatch.name || (slug.charAt(0).toUpperCase() + slug.slice(1));
+            const category = sourceMatch.category || (dom ? 'domestic' : 'international');
+            
             found = {
-              slug: intl.slug,
-              name: intl.name,
-              category: 'international',
-              description: intl.shortDescription,
-              heroImage: intl.image,
-              image: [intl.image, 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=1600'],
-              rating: intl.rating || 4.8,
-              reviewCount: intl.reviewCount || 350,
-              packageCount: intl.packageCount || 15,
-              startingPrice: intl.startingPrice || 69999,
-              bestTime: intl.bestSeason ? intl.bestSeason.join(', ') : 'Year Round',
-              duration: intl.duration || '6 - 9 Days',
-              idealFor: intl.bestFor || ['Families', 'Couples', 'Explorers'],
-              overview: `${intl.name} is one of the world's most sought-after travel destinations offering iconic architecture, rich culture, and breathtaking landscapes.`,
-              highlights: [
-                { title: `Explore ${intl.name} Highlights`, desc: `Top rated sightseeing tours and iconic city attractions.` },
-                { title: `Luxury Stay & Dining`, desc: `Curated 4-star and 5-star hotel accommodations.` }
+              ...sourceMatch,
+              category,
+              overview: sourceMatch.description || sourceMatch.shortDescription || `${formattedName} offers an incredible mix of iconic landmarks, vibrant culture, and unforgettable scenic landscapes.`,
+              highlights: sourceMatch.highlights || [
+                { title: `Explore ${formattedName} Highlights`, desc: `Guided tours of top attractions and scenic viewpoints.` },
+                { title: `Local Experiences`, desc: `Immerse in authentic culture and vibrant markets.` }
               ],
-              experiences: [
-                { name: `${intl.name} Sightseeing Cruise`, tag: 'Luxury' },
-                { name: `Guided Heritage Walk`, tag: 'Culture' }
+              experiences: sourceMatch.experiences || [
+                { name: `${formattedName} Sightseeing Tour`, tag: 'Sightseeing' },
+                { name: `Scenic Nature Walk`, tag: 'Nature' }
               ],
-              inclusions: ['4-Star / 5-Star Hotel Stay', 'Daily Breakfast', 'Airport Transfers', 'Visa Assistance'],
-              exclusions: ['Personal Expenses', 'Flight Airfare (Optional)'],
-              faqs: [
-                { q: `What is the best time to visit ${intl.name}?`, a: `${intl.name} is ideal for travel during ${intl.bestSeason ? intl.bestSeason.join(', ') : 'the holiday season'}.` }
+              inclusions: sourceMatch.inclusions || ['4-Star / 5-Star Accommodation', 'Daily Breakfast', 'Local Transfers'],
+              exclusions: sourceMatch.exclusions || ['Personal Expenses', 'Flight Airfare'],
+              faqs: sourceMatch.faqs || [
+                { q: `What is the best time to visit ${formattedName}?`, a: `It is ideal to travel during ${sourceMatch.season ? sourceMatch.season.join(', ') : 'the holiday season'}.` }
               ],
-              related: ['dubai', "bali", "singapore", "australia"]
+              related: sourceMatch.related || ['goa', 'kerala', 'manali', 'dubai']
             };
           }
         }
 
-        // 3. Fallback generator if slug not explicitly mapped
+        // Fallback generator if entirely unknown slug
         if (!found && slug) {
           const formattedName = slug.charAt(0).toUpperCase() + slug.slice(1);
           found = {
             slug: slug,
             name: formattedName,
             category: 'international',
-            description: `Discover breathtaking sights, rich heritage, and world-class luxury experiences in ${formattedName}.`,
+            description: `Discover breathtaking sights and world-class luxury in ${formattedName}.`,
             heroImage: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=1600',
             image: [
               'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?q=80&w=1600',
@@ -122,7 +127,6 @@ const DestinationDetails = () => {
         if (found) {
           setData(found);
           const pkgs = packages.filter(p => p.destinationSlug?.toLowerCase() === slug?.toLowerCase());
-          // If no specific packages found for this destination, provide default package cards
           if (pkgs.length > 0) {
             setDestPackages(pkgs);
           } else {
@@ -133,15 +137,15 @@ const DestinationDetails = () => {
                 destinationSlug: slug,
                 title: `${found.name} Highlights & Explorer Package`,
                 name: `${found.name} Highlights & Explorer Package`,
-                duration: "7 Days / 6 Nights",
-                rating: 4.9,
+                duration: found.duration || "7 Days / 6 Nights",
+                rating: found.rating || 4.9,
                 price: found.startingPrice || 65000,
                 originalPrice: (found.startingPrice || 65000) * 1.2,
-                image: found.heroImage || "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?q=80&w=800",
+                image: found.heroImage || found.image?.[0] || "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?q=80&w=800",
                 type: found.category || "international",
                 tags: ["Bestseller", "Family"],
-                includedPlaces: ["city-tour", "harbour-cruise"],
-                includedActivities: ["guided-sightseeing"]
+                includedPlaces: ["city-tour", "sightseeing"],
+                includedActivities: ["guided-tour"]
               }
             ]);
           }

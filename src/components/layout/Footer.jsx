@@ -34,40 +34,38 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full font-sans overflow-hidden">
-      {/* Top Trust Badge Strip (White Background) */}
-      <div className="bg-white border-t border-gray-100 py-12">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <motion.div 
-            variants={containerVariants} 
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
-          >
-            {[
-              { icon: MapPin, title: '500+', desc: 'Destinations Worldwide' },
-              { icon: ShieldCheck, title: 'Best Price', desc: 'Guaranteed Best Rates' },
-              { icon: Headset, title: '24/7 Support', desc: 'Always Here For You' },
-              { icon: Lock, title: 'Secure Booking', desc: '100% Encrypted & Safe' }
-            ].map((badge, idx) => {
-              const Icon = badge.icon;
-              return (
-                <motion.div key={idx} variants={itemVariants} className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-sm border border-gray-50 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                  <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                    <Icon className="w-7 h-7 text-primary group-hover:text-white transition-colors" strokeWidth={1.75} />
-                  </div>
-                  <h4 className="font-extrabold text-gray-900 text-lg mb-1">{badge.title}</h4>
-                  <p className="text-sm text-gray-500 font-medium">{badge.desc}</p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
+    <footer className="w-full font-sans overflow-visible mt-20">
+      {/* Top Trust Badge Strip (Overlapping Design) */}
+      <div className="relative -mb-16 z-20 max-w-[1400px] mx-auto px-6 lg:px-12">
+        <motion.div 
+          variants={containerVariants} 
+          initial="hidden" 
+          whileInView="visible" 
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
+          {[
+            { icon: MapPin, title: '500+', desc: 'Destinations Worldwide' },
+            { icon: ShieldCheck, title: 'Best Price', desc: 'Guaranteed Best Rates' },
+            { icon: Headset, title: '24/7 Support', desc: 'Always Here For You' },
+            { icon: Lock, title: 'Secure Booking', desc: '100% Encrypted & Safe' }
+          ].map((badge, idx) => {
+            const Icon = badge.icon;
+            return (
+              <motion.div key={idx} variants={itemVariants} className="group flex flex-col items-center text-center p-6 rounded-2xl bg-white shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                  <Icon className="w-7 h-7 text-primary group-hover:text-white transition-colors" strokeWidth={1.75} />
+                </div>
+                <h4 className="font-extrabold text-gray-900 text-lg mb-1">{badge.title}</h4>
+                <p className="text-sm text-gray-500 font-medium">{badge.desc}</p>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
 
       {/* Main Dark Footer */}
-      <div className="bg-gradient-to-b from-[#001d42] to-[#0b1120] text-gray-300 pt-24 pb-8 relative">
+      <div className="bg-gradient-to-b from-[#001d42] to-[#0b1120] text-gray-300 pt-32 pb-8 relative">
         {/* Abstract Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
           <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary/20 blur-[120px]" />

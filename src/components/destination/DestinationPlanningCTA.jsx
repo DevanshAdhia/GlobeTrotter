@@ -27,10 +27,10 @@ const DestinationPlanningCTA = ({ destination }) => {
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to={`/plan-your-trip/${destination.slug || 'australia'}/australia-highlights`} className="bg-amber-400 hover:bg-amber-300 text-gray-900 px-8 py-4 rounded-xl font-extrabold text-sm transition-all shadow-lg text-center">
+          <Link to={`/plan-your-trip/${destination.slug || 'australia'}/australia-highlights`} className="inline-flex items-center justify-center bg-amber-400 hover:bg-amber-300 text-gray-900 px-8 py-4 rounded-xl font-extrabold text-sm transition-all shadow-lg text-center">
             Plan Custom Itinerary
           </Link>
-          <Link to={`/contact?destination=${destination.slug}`} className="bg-white/10 hover:bg-white/20 border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-sm transition-all text-center">
+          <Link to={`/contact?destination=${destination.slug}`} className="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-sm transition-all text-center">
             Talk to an Expert
           </Link>
         </motion.div>
