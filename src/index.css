@@ -239,3 +239,13 @@ html body a.cta-btn-secondary:hover {
   color: #ffffff !important;
   transform: translateY(-2px) !important;
 }
+
+/* Fix Tailwind vs Bootstrap .collapse conflict */
+.navbar-collapse {
+  visibility: visible !important;
+}
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+  }
+}

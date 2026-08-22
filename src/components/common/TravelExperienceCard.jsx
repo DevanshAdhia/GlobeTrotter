@@ -36,9 +36,9 @@ const TravelExperienceCard = ({ style }) => {
         </div>
 
         {/* Content Overlay */}
-        <div className="absolute bottom-0 left-0 p-7 pb-8 w-full z-10 flex flex-col justify-end">
+        <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end z-10">
           {/* Glass Icon Box */}
-          <div className="w-13 h-13 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-4 group-hover:bg-primary group-hover:border-primary group-hover:scale-110 transition-all duration-300 shadow-lg p-3">
+          <div className="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-4 group-hover:bg-primary group-hover:border-primary group-hover:scale-110 transition-all duration-300 shadow-lg">
             <Icon className="w-6 h-6" />
           </div>
 
@@ -52,7 +52,7 @@ const TravelExperienceCard = ({ style }) => {
 
           <Link 
             to="/packages" 
-            className="inline-flex items-center text-white font-bold text-sm hover:text-amber-300 transition-colors group/link no-underline mt-auto"
+            className="inline-flex items-center text-white font-bold text-sm hover:text-amber-300 transition-colors group/link no-underline mt-4"
           >
             <span className="border-b border-white/40 group-hover/link:border-amber-300 pb-0.5 transition-colors">
               Explore Packages

@@ -23,15 +23,15 @@ const Contact = () => {
       <Topbar />
 
       {/* Hero Header */}
-      <section className="bg-gradient-to-r from-[#001d42] via-[#002b5e] to-indigo-950 text-white py-20 relative">
-        <Container className="text-center max-w-3xl mx-auto">
+      <section className="bg-gradient-to-r from-[#001d42] via-[#002b5e] to-indigo-950 text-white py-24 relative overflow-hidden flex flex-col items-center justify-center">
+        <Container className="text-center max-w-3xl mx-auto relative z-10">
           <span className="text-amber-300 font-bold text-xs uppercase tracking-widest bg-white/10 px-4 py-1.5 rounded-full border border-white/20 mb-4 inline-block">
             Get In Touch
           </span>
           <h1 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
             We'd Love to Hear From You
           </h1>
-          <p className="text-lg text-blue-100/90 leading-relaxed">
+          <p className="text-lg text-blue-100/90 leading-relaxed mb-0">
             Have questions about a holiday package, custom itinerary, or booking? Our travel experts are available 24/7.
           </p>
         </Container>
@@ -43,11 +43,11 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             
             {/* Contact Information Sidebar */}
-            <div className="space-y-6">
-              <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
+            <div className="flex flex-col gap-6">
+              <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col h-auto overflow-hidden">
                 <h3 className="text-xl font-extrabold text-[#002b5e] mb-6">Contact Information</h3>
                 
-                <ul className="space-y-6 text-sm">
+                <ul className="flex flex-col gap-6 text-sm mb-8">
                   <li className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl bg-blue-50 text-primary flex items-center justify-center shrink-0">
                       <MapPin className="w-5 h-5" />
@@ -93,7 +93,7 @@ const Contact = () => {
                   href="https://wa.me/919998812345" 
                   target="_blank" 
                   rel="noreferrer"
-                  className="mt-8 flex items-center justify-center gap-2 bg-[#25d366] hover:bg-[#20b858] text-white font-bold py-3.5 px-6 rounded-2xl transition-all text-sm no-underline shadow-md"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#25d366] hover:bg-[#20b858] text-white font-bold py-3.5 px-6 rounded-2xl transition-all text-sm no-underline shadow-md"
                 >
                   <MessageCircle className="w-5 h-5" />
                   <span>Chat on WhatsApp</span>
@@ -113,27 +113,29 @@ const Contact = () => {
             {/* Contact Form */}
             <div className="lg:col-span-2 bg-white rounded-3xl p-8 md:p-12 border border-gray-100 shadow-sm">
               {submitted ? (
-                <div className="text-center py-16">
-                  <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
+                <div className="text-center py-16 flex flex-col items-center">
+                  <CheckCircle className="w-16 h-16 text-emerald-500 mb-4" />
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Message Sent Successfully!</h3>
                   <p className="text-gray-500 text-sm max-w-md mx-auto mb-6">
                     Our travel experts will contact you within 30 minutes to discuss your itinerary.
                   </p>
                   <button 
                     onClick={() => setSubmitted(false)} 
-                    className="bg-primary text-white font-bold px-6 py-2.5 rounded-xl text-sm hover:bg-primary-dark"
+                    className="inline-flex bg-primary text-white font-bold px-6 py-3 rounded-xl text-sm hover:bg-primary-dark"
                   >
                     Send Another Message
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <h3 className="text-2xl font-extrabold text-[#002b5e] mb-2">Send Us an Enquiry</h3>
-                  <p className="text-sm text-gray-500 mb-6">Fill out the form below and we will help you plan your dream vacation.</p>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                  <div>
+                    <h3 className="text-2xl font-extrabold text-[#002b5e] mb-2">Send Us an Enquiry</h3>
+                    <p className="text-sm text-gray-500">Fill out the form below and we will help you plan your dream vacation.</p>
+                  </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Full Name *</label>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">Full Name *</label>
                       <input 
                         type="text" 
                         required
@@ -144,8 +146,8 @@ const Contact = () => {
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Phone Number *</label>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">Phone Number *</label>
                       <input 
                         type="tel" 
                         required
@@ -158,8 +160,8 @@ const Contact = () => {
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Email Address *</label>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">Email Address *</label>
                       <input 
                         type="email" 
                         required
@@ -170,8 +172,8 @@ const Contact = () => {
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Interested Destination</label>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">Interested Destination</label>
                       <input 
                         type="text" 
                         value={formData.destination}
@@ -182,8 +184,8 @@ const Contact = () => {
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Your Message / Requirements</label>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-xs font-bold text-gray-700 uppercase tracking-wider">Your Message / Requirements</label>
                     <textarea 
                       rows={4}
                       value={formData.message}
@@ -195,7 +197,7 @@ const Contact = () => {
 
                   <button 
                     type="submit"
-                    className="w-full bg-[#002b5e] hover:bg-blue-900 text-white font-bold py-4 rounded-xl text-base transition-all duration-200 shadow-lg shadow-[#002b5e]/20 flex items-center justify-center gap-2"
+                    className="w-full inline-flex items-center justify-center gap-2 bg-[#002b5e] hover:bg-blue-900 text-white font-bold py-4 px-6 rounded-xl text-base transition-all duration-200 shadow-lg shadow-[#002b5e]/20"
                   >
                     <Send className="w-5 h-5 text-amber-300" />
                     <span>Submit Enquiry</span>

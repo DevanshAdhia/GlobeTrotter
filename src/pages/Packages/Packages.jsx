@@ -1,14 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Topbar from '../../components/layout/Topbar';
 import Footer from '../../components/layout/Footer';
 import Container from '../../components/common/Container';
 import PackageCard from '../../components/package/PackageCard';
 import { featuredPackages } from '../../data/packages';
 import { Search, Filter, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import useEmblaCarousel from 'embla-carousel-react';
+
+const heroImages = [
+  "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=2000&q=80", // Travel landscape
+  "https://images.unsplash.com/photo-1504280390267-33106d19eeb3?w=2000&q=80", // Group travel
+  "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=2000&q=80", // Explorer
+  "https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=2000&q=80"  // Cultural
+];
 
 const Packages = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // Embla Slider setup
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCurrentIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.on('select', onSelect);
+    const autoplay = setInterval(() => { emblaApi.scrollNext(); }, 5000);
+    return () => { emblaApi.off('select', onSelect); clearInterval(autoplay); };
+  }, [emblaApi, onSelect]);
 
   const categories = ['All', 'Domestic', 'International', 'Weekend', 'Family', 'Honeymoon'];
 
@@ -30,19 +55,64 @@ const Packages = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       <Topbar />
 
-      {/* Hero Header */}
-      <section className="bg-gradient-to-r from-[#001d42] via-[#002b5e] to-indigo-950 text-white py-16 relative">
-        <Container className="text-center max-w-4xl mx-auto">
-          <span className="text-amber-300 font-bold text-xs uppercase tracking-widest bg-white/10 px-4 py-1.5 rounded-full border border-white/20 mb-3 inline-block">
-            Curated Holiday Packages
-          </span>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
-            Explore All Tour Packages
-          </h1>
-          <p className="text-base md:text-lg text-blue-100/90 max-w-2xl mx-auto">
-            Discover handpicked domestic and international holiday packages with transparent pricing and 5-star hotel options.
-          </p>
-        </Container>
+      {/* Hero Header with Slider */}
+      <section className="relative w-full h-[50vh] min-h-[400px] overflow-hidden group">
+        <div className="overflow-hidden h-full" ref={emblaRef}>
+          <div className="flex h-full">
+            {heroImages.map((src, i) => (
+              <div className="flex-[0_0_100%] min-w-0 relative h-full" key={i}>
+                <motion.img 
+                  initial={{ scale: 1 }} 
+                  animate={{ scale: currentIndex === i ? 1.05 : 1 }} 
+                  transition={{ duration: 15, ease: "linear" }} 
+                  src={src} 
+                  alt={`Travel Package ${i + 1}`} 
+                  className="absolute inset-0 w-full h-full object-cover" 
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none"></div>
+        
+        <div className="absolute inset-0 z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white flex items-center mt-[-30px] pointer-events-none">
+          <div className="max-w-2xl pointer-events-auto">
+            <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-block text-amber-300 font-bold tracking-widest text-xs uppercase bg-white/10 px-4 py-1.5 rounded-full border border-white/20 mb-3">
+              Curated Holiday Packages
+            </motion.span>
+            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
+              Explore All Tour Packages
+            </motion.h1>
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-base md:text-lg text-white/90 max-w-2xl leading-relaxed">
+              Discover handpicked domestic and international holiday packages with transparent pricing and 5-star hotel options.
+            </motion.p>
+          </div>
+        </div>
+
+        {/* Thumbnails Overlay */}
+        <div className="absolute bottom-8 right-4 sm:right-8 z-20 flex justify-center gap-3 px-4 pointer-events-auto hidden md:flex">
+          {heroImages.map((src, i) => (
+            <button
+              key={i}
+              onClick={() => emblaApi && emblaApi.scrollTo(i)}
+              className={`relative w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer ${
+                currentIndex === i 
+                  ? 'border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.4)] z-30' 
+                  : 'border-white/30 opacity-60 hover:opacity-100 scale-100'
+              }`}
+            >
+              <img src={src} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover" />
+              {currentIndex === i && (
+                <motion.div 
+                  layoutId="packages-active-thumb" 
+                  className="absolute inset-0 border-2 border-primary rounded-lg z-10 pointer-events-none" 
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                />
+              )}
+            </button>
+          ))}
+        </div>
       </section>
 
       {/* Filter & Search Bar Strip */}

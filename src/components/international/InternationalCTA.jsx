@@ -18,10 +18,10 @@ const InternationalCTA = () => {
             Tell us your travel preferences and our experts can help you find the right international experience.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/plan" className="bg-white text-primary hover:bg-gray-100 px-8 py-4 rounded-xl font-bold text-lg transition-colors shadow-lg">
+            <Link to="/plan" className="inline-flex items-center justify-center bg-white text-primary hover:bg-gray-100 px-8 py-4 rounded-xl font-bold text-lg transition-colors shadow-lg">
               Plan My Trip
             </Link>
-            <Link to="/contact" className="bg-transparent border-2 border-white/50 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-colors">
+            <Link to="/contact" className="inline-flex items-center justify-center bg-transparent border-2 border-white/50 text-white hover:bg-white/10 px-8 py-4 rounded-xl font-bold text-lg transition-colors">
               Talk to an Expert
             </Link>
           </motion.div>

@@ -11,7 +11,8 @@ const About = () => {
       <Topbar />
       
       {/* Hero Header */}
-      <section className="bg-gradient-to-r from-[#001d42] via-[#002b5e] to-indigo-950 text-white py-24 relative overflow-hidden">
+      {/* Hero Header */}
+      <section className="bg-gradient-to-r from-[#001d42] via-[#002b5e] to-indigo-950 text-white py-24 relative overflow-hidden flex flex-col items-center justify-center">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-400/20 via-transparent to-transparent" />
         <Container className="relative z-10 text-center max-w-4xl mx-auto">
           <span className="text-amber-300 font-bold text-xs uppercase tracking-widest bg-white/10 px-4 py-1.5 rounded-full border border-white/20 mb-4 inline-block">
@@ -20,28 +21,28 @@ const About = () => {
           <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">
             Crafting Unforgettable Journeys Since 2009
           </h1>
-          <p className="text-lg md:text-xl text-blue-100/90 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-blue-100/90 max-w-2xl mx-auto leading-relaxed mb-0">
             With over 15+ years of travel excellence, 45+ branch locations, and 50,000+ happy adventurers, we turn your travel dreams into lifelong memories.
           </p>
         </Container>
       </section>
 
       {/* Stats Counter Row */}
-      <section className="-mt-10 relative z-20 max-w-5xl mx-auto px-4 w-full">
+      <section className="-mt-10 relative z-20 max-w-5xl mx-auto px-4 w-full mb-16">
         <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          <div>
+          <div className="flex flex-col items-center justify-center">
             <div className="text-3xl md:text-4xl font-extrabold text-[#002b5e] mb-1">15+</div>
             <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Years Experience</div>
           </div>
-          <div>
+          <div className="flex flex-col items-center justify-center">
             <div className="text-3xl md:text-4xl font-extrabold text-[#002b5e] mb-1">50K+</div>
             <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Happy Travelers</div>
           </div>
-          <div>
+          <div className="flex flex-col items-center justify-center">
             <div className="text-3xl md:text-4xl font-extrabold text-[#002b5e] mb-1">45+</div>
             <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Branch Offices</div>
           </div>
-          <div>
+          <div className="flex flex-col items-center justify-center">
             <div className="text-3xl md:text-4xl font-extrabold text-[#002b5e] mb-1">500+</div>
             <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Destinations</div>
           </div>
@@ -49,9 +50,9 @@ const About = () => {
       </section>
 
       {/* Main Content */}
-      <section className="py-20">
+      <section className="py-12">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
             <div>
               <span className="text-primary font-bold text-xs uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-full border border-blue-100 mb-4 inline-block">
                 Our Mission & Story
