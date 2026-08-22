@@ -37,34 +37,35 @@ const InternationalFilters = ({ activeFilters = {}, onFilterChange, onClearAll }
   const FilterSection = ({ title, filterKey, options, helperText }) => {
     const activeCount = (activeFilters[filterKey] || []).length;
     return (
-      <div className="mb-6 pb-5 border-b border-gray-100 last:border-b-0 last:mb-0 last:pb-0">
-        <div className="flex items-center justify-between mb-2">
-          <h4 className="text-xs font-extrabold text-gray-900 uppercase tracking-wider flex items-center space-x-1.5">
-            <span>{title}</span>
-          </h4>
-          {activeCount > 0 && (
-            <span className="w-5 h-5 rounded-full bg-primary/10 text-primary text-[10px] font-extrabold flex items-center justify-center">
-              {activeCount}
-            </span>
-          )}
-        </div>
-        {helperText && <p className="text-[11px] text-gray-500 mb-3 flex items-start"><Info className="w-3.5 h-3.5 mr-1 mt-0.5 shrink-0 text-primary" /> {helperText}</p>}
-        <div className="flex flex-wrap gap-2">
-          {options.map(opt => {
+      <div className="py-4 border-b border-gray-200 last:border-b-0">
+        <h4 className="text-[15px] font-bold text-gray-900 mb-1">{title}</h4>
+        {helperText && (
+          <p className="text-xs text-gray-500 mb-3 leading-tight">
+            {helperText}
+          </p>
+        )}
+        <div className="space-y-2.5 mt-3">
+          {options.map((opt, i) => {
             const isSelected = (activeFilters[filterKey] || []).includes(opt);
+            // Simulate a count similar to the booking.com layout
+            const simulatedCount = Math.max(1, Math.floor(100 / (i + 1)) - Math.floor(Math.random() * 5)); 
+            
             return (
-              <button 
+              <label 
                 key={opt} 
-                onClick={() => handleToggle(filterKey, opt)} 
-                aria-pressed={isSelected}
-                className={clsx(
-                  'filter-pill-button',
-                  isSelected ? 'filter-pill-active' : 'filter-pill-inactive'
-                )}
+                className="flex items-center justify-between cursor-pointer group"
               >
-                {isSelected && <Check className="w-3.5 h-3.5 shrink-0 text-white stroke-[3]" />}
-                <span>{opt}</span>
-              </button>
+                <div className="flex items-center space-x-3">
+                  <input 
+                    type="checkbox" 
+                    checked={isSelected}
+                    onChange={() => handleToggle(filterKey, opt)}
+                    className="w-[18px] h-[18px] rounded-[3px] border-gray-300 text-primary focus:ring-primary/20 focus:ring-offset-0 transition-colors cursor-pointer"
+                  />
+                  <span className="text-[14px] text-gray-700 group-hover:text-gray-900">{opt}</span>
+                </div>
+                <span className="text-[13px] text-gray-400 font-medium">{simulatedCount}</span>
+              </label>
             );
           })}
         </div>
