@@ -12,6 +12,15 @@ import WeekendGateways           from '../pages/WeekendGateways/WeekendGateways'
 import DestinationDetails        from '../pages/DestinationDetails/DestinationDetails';
 import PackageDetails            from '../pages/PackageDetails/PackageDetails';
 
+/* Newly created public pages for Footer & Navigation links */
+import About            from '../pages/About/About';
+import Contact          from '../pages/Contact/Contact';
+import Packages         from '../pages/Packages/Packages';
+import Deals            from '../pages/Deals/Deals';
+import FAQ              from '../pages/FAQ/FAQ';
+import PrivacyPolicy    from '../pages/Legal/PrivacyPolicy';
+import TermsConditions  from '../pages/Legal/TermsConditions';
+
 /* Phase 11 Auth — eager (needed immediately) */
 import Login          from '../pages/Login/Login';
 import Signup         from '../pages/Signup/Signup';
@@ -51,10 +60,13 @@ export const PUBLIC_ROUTES = [
   { path: '/plan-your-trip/:destinationSlug/:packageSlug', element: <PlanYourTrip /> },
   { path: '/review-trip/:destinationSlug/:packageSlug',    element: <ReviewTrip /> },
   { path: '/discover/:destinationSlug',                    element: <Discover /> },
-  { path: '/packages',                                     element: <PlaceholderPage title="Packages" /> },
-  { path: '/deals',                                        element: <PlaceholderPage title="Travel Deals" /> },
-  { path: '/about',                                        element: <PlaceholderPage title="About Us" /> },
-  { path: '/contact',                                      element: <PlaceholderPage title="Contact Us" /> },
+  { path: '/packages',                                     element: <Packages /> },
+  { path: '/deals',                                        element: <Deals /> },
+  { path: '/about',                                        element: <About /> },
+  { path: '/contact',                                      element: <Contact /> },
+  { path: '/faq',                                          element: <FAQ /> },
+  { path: '/privacy',                                      element: <PrivacyPolicy /> },
+  { path: '/terms',                                        element: <TermsConditions /> },
   { path: '*',                                             element: <PlaceholderPage title="Page Not Found" /> },
 ];
 

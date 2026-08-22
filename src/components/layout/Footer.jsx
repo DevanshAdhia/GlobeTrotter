@@ -109,8 +109,8 @@ const Footer = () => {
                 <li><Link to="/domestic-destinations" className="hover:text-white transition-colors">Domestic Trips</Link></li>
                 <li><Link to="/international-destinations" className="hover:text-white transition-colors">International Tours</Link></li>
                 <li><Link to="/weekend-gateways" className="hover:text-white transition-colors">Weekend Gateways</Link></li>
-                <li><Link to="/domestic-destinations" className="hover:text-white transition-colors">Family Packages</Link></li>
-                <li><Link to="/international-destinations" className="hover:text-white transition-colors">Honeymoon Specials</Link></li>
+                <li><Link to="/packages" className="hover:text-white transition-colors">Family Packages</Link></li>
+                <li><Link to="/packages" className="hover:text-white transition-colors">Honeymoon Specials</Link></li>
               </ul>
             </div>
 
@@ -121,7 +121,7 @@ const Footer = () => {
                 <li><Link to="/packages" className="hover:text-white transition-colors">All Packages</Link></li>
                 <li><Link to="/deals" className="hover:text-white transition-colors">Exclusive Deals</Link></li>
                 <li><Link to="/domestic-destinations" className="hover:text-white transition-colors">Popular Cities</Link></li>
-                <li><Link to="/about" className="hover:text-white transition-colors">Custom Itinerary</Link></li>
+                <li><Link to="/plan-your-trip/goa/goa-express-special" className="hover:text-white transition-colors">Custom Itinerary</Link></li>
                 <li><Link to="/contact" className="hover:text-white transition-colors">Travel Insurance</Link></li>
               </ul>
             </div>
@@ -133,8 +133,8 @@ const Footer = () => {
                 <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
                 <li><Link to="/about" className="hover:text-white transition-colors">Our Story</Link></li>
                 <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
-                <li><Link to="/about" className="hover:text-white transition-colors">FAQs & Help</Link></li>
-                <li><Link to="/about" className="hover:text-white transition-colors">Terms & Policies</Link></li>
+                <li><Link to="/faq" className="hover:text-white transition-colors">FAQs & Help</Link></li>
+                <li><Link to="/terms" className="hover:text-white transition-colors">Terms & Policies</Link></li>
               </ul>
             </div>
 
@@ -213,8 +213,8 @@ const Footer = () => {
             </p>
             
             <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-gray-400 font-medium">
-              <Link to="/about" className="hover:text-white transition-colors">Privacy Policy</Link>
-              <Link to="/about" className="hover:text-white transition-colors">Terms & Conditions</Link>
+              <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/terms" className="hover:text-white transition-colors">Terms & Conditions</Link>
               <Link to="/about" className="hover:text-white transition-colors">Sitemap</Link>
               
               <div className="relative ml-2">
