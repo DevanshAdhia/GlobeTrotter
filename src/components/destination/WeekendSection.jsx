@@ -11,7 +11,7 @@ const WeekendSection = () => {
   return (
     <section className="py-16 bg-gray-50">
       <Container>
-        <SectionHeader eyebrow="Quick Escapes" title="Perfect Weekend Escapes" description="Short trips. Big memories." actionText="View All Weekend Gateways" actionLink="/destinations?type=weekend" />
+        <SectionHeader eyebrow="Quick Escapes" title="Perfect Weekend Escapes" description="Short trips. Big memories." actionText="View All Weekend Gateways" actionLink="/weekend-gateways" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {weekend.map((dest, i) => (
             <motion.div key={dest.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}

@@ -1,131 +1,236 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MessageCircle, MapPin, Phone, Mail, Clock } from 'lucide-react';
-
-const FacebookIcon = (props) => (
-  <svg fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
-);
-
-const InstagramIcon = (props) => (
-  <svg fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-);
-
-const YoutubeIcon = (props) => (
-  <svg fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-);
-
+import { 
+  MapPin, 
+  ShieldCheck, 
+  Headset, 
+  Lock,
+  Award,
+  DollarSign,
+  HeadphonesIcon,
+  Shield,
+  Globe,
+  ChevronDown
+} from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-gray-100 pt-16 mt-10">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 pb-12">
-        
-        {/* Column 1: Brand */}
-        <div className="lg:col-span-1">
-          <div className="flex flex-col cursor-pointer mb-6" onClick={() => window.scrollTo(0,0)}>
-            <div className="text-[#002b5e] font-extrabold text-3xl tracking-tight leading-none flex items-end gap-1">
-              <span className="text-4xl">A</span>jay Modi
+    <footer className="w-full font-sans">
+      {/* Top Trust Badge Strip (White Background) */}
+      <div className="bg-white border-t border-gray-100 py-12">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Badge 1 */}
+            <div className="flex flex-col items-center text-center p-4 rounded-xl hover:bg-gray-50/80 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center mb-4">
+                <MapPin className="w-7 h-7 text-[#8b5cf6]" strokeWidth={1.75} />
+              </div>
+              <h4 className="font-bold text-gray-900 text-base mb-1">500+</h4>
+              <p className="text-xs text-gray-500 font-medium">Destinations Worldwide</p>
             </div>
-            <div className="flex flex-col ml-1 leading-none mt-1">
-              <span className="text-[#002b5e] text-[11px] font-bold tracking-widest">TRAVELS</span>
-              <span className="text-gray-400 text-[7px] tracking-wider">Dream. Travel. Explore.</span>
+            
+            {/* Badge 2 */}
+            <div className="flex flex-col items-center text-center p-4 rounded-xl hover:bg-gray-50/80 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center mb-4">
+                <ShieldCheck className="w-7 h-7 text-[#8b5cf6]" strokeWidth={1.75} />
+              </div>
+              <h4 className="font-bold text-gray-900 text-base mb-1">Best Price</h4>
+              <p className="text-xs text-gray-500 font-medium">Guaranteed Best Rates</p>
+            </div>
+
+            {/* Badge 3 */}
+            <div className="flex flex-col items-center text-center p-4 rounded-xl hover:bg-gray-50/80 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center mb-4">
+                <Headset className="w-7 h-7 text-[#8b5cf6]" strokeWidth={1.75} />
+              </div>
+              <h4 className="font-bold text-gray-900 text-base mb-1">24/7 Support</h4>
+              <p className="text-xs text-gray-500 font-medium">Always Here For You</p>
+            </div>
+
+            {/* Badge 4 */}
+            <div className="flex flex-col items-center text-center p-4 rounded-xl hover:bg-gray-50/80 transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center mb-4">
+                <Lock className="w-7 h-7 text-[#8b5cf6]" strokeWidth={1.75} />
+              </div>
+              <h4 className="font-bold text-gray-900 text-base mb-1">Secure Booking</h4>
+              <p className="text-xs text-gray-500 font-medium">100% Encrypted & Safe</p>
             </div>
           </div>
-          <p className="text-xs text-gray-500 mb-6 leading-relaxed">
-            15+ years of creating unforgettable travel experiences. Explore the world with our handpicked tour packages.
-          </p>
-          <div className="flex items-center space-x-3">
-            <a href="#" className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-[#3b5998] hover:bg-[#3b5998] hover:text-white transition-colors"><FacebookIcon className="w-4 h-4" /></a>
-            <a href="#" className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-[#e1306c] hover:bg-[#e1306c] hover:text-white transition-colors"><InstagramIcon className="w-4 h-4" /></a>
-            <a href="#" className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-[#ff0000] hover:bg-[#ff0000] hover:text-white transition-colors"><YoutubeIcon className="w-4 h-4" /></a>
-            <a href="#" className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-[#25d366] hover:bg-[#25d366] hover:text-white transition-colors"><MessageCircle className="w-4 h-4" /></a>
-          </div>
-
-        </div>
-
-        {/* Column 2: Quick Links */}
-        <div>
-          <h4 className="font-bold text-sm text-gray-900 mb-5">Quick Links</h4>
-          <ul className="space-y-3 text-xs text-gray-600 font-medium">
-            <li><Link to="/" className="hover:text-[#002b5e]">Home</Link></li>
-            <li><Link to="/domestic-destinations" className="hover:text-[#002b5e]">Domestic Destinations</Link></li>
-            <li><Link to="/international-destinations" className="hover:text-[#002b5e]">International Destinations</Link></li>
-            <li><Link to="/weekend-gateways" className="hover:text-[#002b5e]">Weekend Gateways</Link></li>
-            <li><Link to="/packages" className="hover:text-[#002b5e]">Packages</Link></li>
-            <li><Link to="/deals" className="hover:text-[#002b5e]">Deals</Link></li>
-            <li><Link to="/about" className="hover:text-[#002b5e]">About Us</Link></li>
-          </ul>
-        </div>
-
-        {/* Column 3: Popular Destinations */}
-        <div>
-          <h4 className="font-bold text-sm text-gray-900 mb-5">Popular Destinations</h4>
-          <ul className="space-y-3 text-xs text-gray-600 font-medium">
-            <li><Link to="/discover/kashmir" className="hover:text-[#002b5e]">Kashmir Packages</Link></li>
-            <li><Link to="/discover/kerala" className="hover:text-[#002b5e]">Kerala Packages</Link></li>
-            <li><Link to="/discover/himachal" className="hover:text-[#002b5e]">Himachal Packages</Link></li>
-            <li><Link to="/discover/rajasthan" className="hover:text-[#002b5e]">Rajasthan Packages</Link></li>
-            <li><Link to="/discover/goa" className="hover:text-[#002b5e]">Goa Packages</Link></li>
-            <li><Link to="/discover/uttarakhand" className="hover:text-[#002b5e]">Uttarakhand Packages</Link></li>
-          </ul>
-        </div>
-
-        {/* Column 4: Travel Styles */}
-        <div>
-          <h4 className="font-bold text-sm text-gray-900 mb-5">Travel Styles</h4>
-          <ul className="space-y-3 text-xs text-gray-600 font-medium">
-            <li><Link to="#" className="hover:text-[#002b5e]">Family Tours</Link></li>
-            <li><Link to="#" className="hover:text-[#002b5e]">Couple Tours</Link></li>
-            <li><Link to="#" className="hover:text-[#002b5e]">Luxury Tours</Link></li>
-            <li><Link to="#" className="hover:text-[#002b5e]">Adventure Tours</Link></li>
-            <li><Link to="#" className="hover:text-[#002b5e]">Group Tours</Link></li>
-            <li><Link to="#" className="hover:text-[#002b5e]">Women Special Tours</Link></li>
-          </ul>
-        </div>
-
-        {/* Column 5: Contact Us */}
-        <div>
-          <h4 className="font-bold text-sm text-gray-900 mb-5">Contact Us</h4>
-          <ul className="space-y-4 text-xs text-gray-600 font-medium">
-            <li className="flex items-start gap-2">
-              <MapPin className="w-4 h-4 text-[#002b5e] shrink-0 mt-0.5" />
-              <span>Ahmedabad, Gujarat, India</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-[#002b5e] shrink-0" />
-              <span>+91 99988 12345</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-[#002b5e] shrink-0" />
-              <span>info@ajaymoditravels.com</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-[#002b5e] shrink-0" />
-              <span>Mon - Sun: 9:00 AM - 8:00 PM</span>
-            </li>
-          </ul>
-          <a href="#" className="mt-5 inline-flex items-center gap-2 bg-[#25d366] hover:bg-[#20b858] text-white px-5 py-2.5 rounded-md font-bold text-xs transition-colors">
-            <MessageCircle className="w-4 h-4" /> WhatsApp Us
-          </a>
         </div>
       </div>
 
-      {/* Bottom Strip */}
-      <div className="bg-[#002b5e] text-white py-4 px-4 md:px-8 flex flex-col md:flex-row items-center justify-between text-[11px] font-medium">
-        <p>© 2025 Ajay Modi Travels. All rights reserved.</p>
-        <div className="flex items-center gap-4 mt-2 md:mt-0 opacity-80">
-          <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
-          <Link to="/terms" className="hover:text-white">Terms & Conditions</Link>
-          <Link to="/cancellation" className="hover:text-white">Cancellation Policy</Link>
-          <Link to="/sitemap" className="hover:text-white">Sitemap</Link>
+      {/* Main Dark Footer */}
+      <div className="bg-[#0b1120] text-gray-300 pt-20 pb-8">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+          
+          {/* Main Grid Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-10 pb-16 border-b border-gray-800">
+            
+            {/* Column 1: Brand Info */}
+            <div className="lg:col-span-1 pr-0 lg:pr-4">
+              <div className="flex items-center gap-3 mb-6 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+                <div className="w-10 h-10 text-[#8b5cf6]">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                    <path d="M2 12h20" />
+                  </svg>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-white font-extrabold text-xl tracking-tight leading-none mb-1">GlobeTrotter</span>
+                  <span className="text-gray-400 text-[9px] font-semibold tracking-[0.2em] uppercase">Ajay Modi Travels</span>
+                </div>
+              </div>
+              
+              <p className="text-sm text-gray-400 mb-6 leading-relaxed">
+                Explore the world with confidence. We help you discover amazing destinations, plan trips, and create memories that last forever.
+              </p>
+              
+              <div className="flex items-center gap-3">
+                <a href="#" className="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-[#8b5cf6] hover:bg-[#8b5cf6]/10 transition-all">
+                  <svg xmlns="http://www.3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </a>
+                <a href="#" className="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-[#8b5cf6] hover:bg-[#8b5cf6]/10 transition-all">
+                  <svg xmlns="http://www.3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+                <a href="#" className="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-[#8b5cf6] hover:bg-[#8b5cf6]/10 transition-all">
+                  <svg xmlns="http://www.3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+                </a>
+                <a href="#" className="w-9 h-9 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:border-[#8b5cf6] hover:bg-[#8b5cf6]/10 transition-all">
+                  <svg xmlns="http://www.3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Column 2: Explore */}
+            <div>
+              <h4 className="font-bold text-white text-base mb-5 tracking-wide">Explore</h4>
+              <ul className="space-y-3 text-sm text-gray-400 font-medium">
+                <li><Link to="/domestic-destinations" className="hover:text-white transition-colors">Domestic Trips</Link></li>
+                <li><Link to="/international-destinations" className="hover:text-white transition-colors">International Tours</Link></li>
+                <li><Link to="/weekend-gateways" className="hover:text-white transition-colors">Weekend Gateways</Link></li>
+                <li><Link to="/domestic-destinations" className="hover:text-white transition-colors">Family Packages</Link></li>
+                <li><Link to="/international-destinations" className="hover:text-white transition-colors">Honeymoon Specials</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 3: Plan Your Trip */}
+            <div>
+              <h4 className="font-bold text-white text-base mb-5 tracking-wide">Plan Your Trip</h4>
+              <ul className="space-y-3 text-sm text-gray-400 font-medium">
+                <li><Link to="/packages" className="hover:text-white transition-colors">All Packages</Link></li>
+                <li><Link to="/deals" className="hover:text-white transition-colors">Exclusive Deals</Link></li>
+                <li><Link to="/domestic-destinations" className="hover:text-white transition-colors">Popular Cities</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">Custom Itinerary</Link></li>
+                <li><Link to="/contact" className="hover:text-white transition-colors">Travel Insurance</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 4: Company & Support */}
+            <div>
+              <h4 className="font-bold text-white text-base mb-5 tracking-wide">Company & Support</h4>
+              <ul className="space-y-3 text-sm text-gray-400 font-medium">
+                <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">Our Story</Link></li>
+                <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">FAQs & Help</Link></li>
+                <li><Link to="/about" className="hover:text-white transition-colors">Terms & Policies</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 5: Newsletter */}
+            <div>
+              <h4 className="font-bold text-white text-base mb-5 tracking-wide">Newsletter</h4>
+              <p className="text-sm text-gray-400 mb-4 leading-relaxed">
+                Subscribe to get special offers, free giveaways, and once-in-a-lifetime deals.
+              </p>
+              <form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-3">
+                <input 
+                  type="email" 
+                  placeholder="Enter your email address" 
+                  className="w-full bg-[#1e293b] text-white px-4 py-3 rounded-xl text-sm border border-gray-700/80 focus:outline-none focus:border-[#8b5cf6] transition-colors placeholder:text-gray-500"
+                />
+                <button 
+                  type="submit" 
+                  className="w-full bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-semibold py-3 rounded-xl text-sm transition-all duration-200 shadow-lg shadow-[#8b5cf6]/20 active:scale-[0.98]"
+                >
+                  Subscribe Now
+                </button>
+              </form>
+            </div>
+            
+          </div>
+
+          {/* Secondary Trust Features */}
+          <div className="py-12 border-b border-gray-800">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-gray-900 border border-gray-800 text-[#8b5cf6]">
+                  <Award className="w-6 h-6" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h5 className="text-white font-bold text-sm mb-0.5">Best Price Guarantee</h5>
+                  <p className="text-xs text-gray-400">Guaranteed lowest travel rates.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-gray-900 border border-gray-800 text-[#8b5cf6]">
+                  <DollarSign className="w-6 h-6" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h5 className="text-white font-bold text-sm mb-0.5">Easy Booking</h5>
+                  <p className="text-xs text-gray-400">Instant confirmation in minutes.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-gray-900 border border-gray-800 text-[#8b5cf6]">
+                  <HeadphonesIcon className="w-6 h-6" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h5 className="text-white font-bold text-sm mb-0.5">24/7 Expert Support</h5>
+                  <p className="text-xs text-gray-400">Dedicated assistance anytime.</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <div className="p-3 rounded-xl bg-gray-900 border border-gray-800 text-[#8b5cf6]">
+                  <Shield className="w-6 h-6" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h5 className="text-white font-bold text-sm mb-0.5">Secure Payments</h5>
+                  <p className="text-xs text-gray-400">100% encrypted & protected.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Absolute Bottom Strip */}
+          <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <p className="text-xs text-gray-500 font-medium">
+              © {new Date().getFullYear()} GlobeTrotter (Ajay Modi Travels). All rights reserved.
+            </p>
+            
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-gray-400 font-medium">
+              <Link to="/about" className="hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/about" className="hover:text-white transition-colors">Terms & Conditions</Link>
+              <Link to="/about" className="hover:text-white transition-colors">Sitemap</Link>
+              
+              <div className="relative ml-2">
+                <button className="flex items-center gap-2 bg-[#1e293b] border border-gray-700/80 hover:border-gray-500 rounded-lg px-3 py-1.5 text-white text-xs transition-colors">
+                  <Globe className="w-3.5 h-3.5" />
+                  <span>English (US)</span>
+                  <ChevronDown className="w-3.5 h-3.5 opacity-70" />
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
-
-      {/* Floating WhatsApp Button */}
-      <a href="#" className="fixed bottom-6 right-6 w-14 h-14 bg-[#25d366] rounded-full shadow-lg flex items-center justify-center text-white hover:scale-110 transition-transform z-50">
-        <MessageCircle className="w-8 h-8" />
-      </a>
     </footer>
   );
 };
+
 export default Footer;

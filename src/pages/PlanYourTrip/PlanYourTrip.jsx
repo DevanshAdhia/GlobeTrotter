@@ -75,7 +75,9 @@ const PlanYourTrip = () => {
     hotelCost, 
     transportCost, 
     selectedPlaces, 
-    selectedActivities
+    selectedActivities,
+    adults,
+    children
   );
 
   const handleContinue = () => {

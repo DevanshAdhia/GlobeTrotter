@@ -116,8 +116,8 @@ export const TripSummary = ({
   return (
     <>
       {/* Desktop Sidebar */}
-      <div className="hidden lg:block w-96 shrink-0">
-        <div className="sticky top-24 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+      <div className="hidden lg:block w-96 shrink-0 sticky top-24 self-start">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
           <SummaryContent />
         </div>
       </div>

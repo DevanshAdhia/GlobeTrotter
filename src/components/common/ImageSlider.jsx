@@ -42,6 +42,18 @@ const ImageSlider = ({ images, alt, className = '' }) => {
     exit: (dir) => ({ x: dir < 0 ? 100 : -100, opacity: 0, zIndex: 0 })
   };
 
+  const [imgSrc, setImgSrc] = useState(imgArray[currentIndex]);
+
+  // Keep imgSrc in sync if currentIndex or imgArray changes
+  React.useEffect(() => {
+    setImgSrc(imgArray[currentIndex]);
+  }, [currentIndex, imgArray]);
+
+  const handleError = () => {
+    // Premium generic travel fallback image
+    setImgSrc('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800');
+  };
+
   return (
     <div className={`relative w-full h-full overflow-hidden group/slider ${className}`}>
       <AnimatePresence initial={false} custom={direction} mode="popLayout">
@@ -53,7 +65,8 @@ const ImageSlider = ({ images, alt, className = '' }) => {
           animate="center"
           exit="exit"
           transition={{ x: { type: "spring", stiffness: 300, damping: 30 }, opacity: { duration: 0.2 } }}
-          src={imgArray[currentIndex]}
+          src={imgSrc}
+          onError={handleError}
           alt={`${alt} - view ${currentIndex + 1}`}
           className="absolute inset-0 w-full h-full object-cover"
         />

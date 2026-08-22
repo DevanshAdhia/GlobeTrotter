@@ -11,7 +11,7 @@ const PackageCard = ({ pkg }) => {
     toast('Please log in to save this trip.', { icon: '🔒' });
   };
   return (
-    <Link to={`/packages/${pkg.id}`} className="group block rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col focus:outline-none focus:ring-2 focus:ring-primary">
+    <Link to={`/packages/${pkg.slug}`} className="group block rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col focus:outline-none focus:ring-2 focus:ring-primary no-underline text-inherit">
       <div className="relative aspect-[4/3] overflow-hidden">
         <ImageSlider images={pkg.image} alt={pkg.name} className="transition-transform duration-500 group-hover:scale-105" />
         

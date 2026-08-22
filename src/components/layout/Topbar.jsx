@@ -1,109 +1,96 @@
-import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import { Menu, X, Star, MapPin, Users, Clock, Phone, Search, ChevronDown } from 'lucide-react';
-
-const FacebookIcon = (props) => (
-  <svg fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
-);
-
-const InstagramIcon = (props) => (
-  <svg fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-);
-
-const TwitterIcon = (props) => (
-  <svg fill="currentColor" viewBox="0 0 24 24" {...props}><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.936 9.936 0 0024 4.59z"/></svg>
-);
+import { Star, MapPin, Users, Clock, Phone, Search } from 'lucide-react';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Container from 'react-bootstrap/Container';
 
 const Topbar = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user } = useAuth();
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm flex flex-col w-full">
+    <header className="w-100" style={{ position: 'sticky', top: 0, zIndex: 1050 }}>
       {/* TOP STRIP - Dark Blue */}
-      <div className="hidden lg:flex justify-between items-center px-8 py-2 bg-[#002b5e] text-white text-xs font-medium">
-        <div className="flex items-center space-x-6">
-          <span className="flex items-center gap-1.5"><Star className="w-3.5 h-3.5" /> 15+ Years of Excellence</span>
-          <span className="flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5" /> 45+ Branches</span>
-          <span className="flex items-center gap-1.5"><Users className="w-3.5 h-3.5" /> 50,000+ Happy Travelers</span>
-          <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> 24x7 Travel Support</span>
+      <div className="d-none d-lg-flex justify-content-between align-items-center px-4 py-2 text-white" style={{ backgroundColor: '#002b5e', fontSize: '12px' }}>
+        <div className="d-flex align-items-center gap-4">
+          <span className="d-flex align-items-center gap-2"><Star size={14} /> 15+ Years of Excellence</span>
+          <span className="d-flex align-items-center gap-2"><MapPin size={14} /> 45+ Branches</span>
+          <span className="d-flex align-items-center gap-2"><Users size={14} /> 50,000+ Happy Travelers</span>
+          <span className="d-flex align-items-center gap-2"><Clock size={14} /> 24x7 Travel Support</span>
         </div>
-        <div className="flex items-center space-x-6">
-          <span className="flex items-center gap-1.5 font-bold"><Phone className="w-3.5 h-3.5" /> +91 99988 12345</span>
-          <span className="cursor-pointer hover:text-gray-300">Talk to Expert</span>
-          <div className="flex items-center space-x-3 ml-2 border-l border-white/20 pl-6">
-            <FacebookIcon className="w-4 h-4 cursor-pointer hover:text-gray-300" />
-            <InstagramIcon className="w-4 h-4 cursor-pointer hover:text-gray-300" />
-            <TwitterIcon className="w-4 h-4 cursor-pointer hover:text-gray-300" />
-
+        <div className="d-flex align-items-center gap-4">
+          <span className="d-flex align-items-center gap-2 fw-bold"><Phone size={14} /> +91 99988 12345</span>
+          <span style={{ cursor: 'pointer' }}>Talk to Expert</span>
+          <div className="d-flex align-items-center gap-3 ms-2 ps-3 border-start border-light border-opacity-25">
+            <svg xmlns="http://www.3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ cursor: 'pointer' }}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            <svg xmlns="http://www.3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ cursor: 'pointer' }}><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <svg xmlns="http://www.3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ cursor: 'pointer' }}><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
           </div>
         </div>
       </div>
 
       {/* MAIN NAV - White */}
-      <div className="flex justify-between items-center px-4 lg:px-8 py-3 bg-white">
-        
-        {/* LOGO */}
-        <div className="flex items-center cursor-pointer" onClick={() => navigate('/')}>
-          <div className="text-[#002b5e] font-extrabold text-2xl tracking-tight leading-none flex items-end gap-1">
-            <span className="text-3xl">A</span>jay Modi
-          </div>
-          <div className="flex flex-col ml-1 leading-none mt-1">
-            <span className="text-[#002b5e] text-[10px] font-bold tracking-widest">TRAVELS</span>
-            <span className="text-gray-400 text-[6px] tracking-wider">Dream. Travel. Explore.</span>
-          </div>
-        </div>
-
-        {/* CENTER LINKS */}
-        <nav className="hidden lg:flex items-center space-x-8 text-sm font-bold text-[#002b5e]">
-          <NavLink to="/" className="hover:text-primary transition-colors">Home</NavLink>
-          <div className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">Domestic <ChevronDown className="w-3.5 h-3.5 text-gray-400" /></div>
-          <div className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">International <ChevronDown className="w-3.5 h-3.5 text-gray-400" /></div>
-          <div className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">Weekend Gateways <ChevronDown className="w-3.5 h-3.5 text-gray-400" /></div>
-          <NavLink to="/packages" className="hover:text-primary transition-colors">Packages</NavLink>
-          <NavLink to="/deals" className="hover:text-primary transition-colors">Deals</NavLink>
-          <div className="flex items-center gap-1 cursor-pointer hover:text-primary transition-colors">About Us <ChevronDown className="w-3.5 h-3.5 text-gray-400" /></div>
-        </nav>
-
-        {/* RIGHT ACTIONS */}
-        <div className="flex items-center space-x-4">
-          <Search className="w-5 h-5 text-gray-600 hidden lg:block cursor-pointer hover:text-primary" />
-          <div className="w-9 h-9 rounded-full bg-gray-50 flex items-center justify-center hidden lg:flex cursor-pointer hover:bg-gray-100">
-            <Phone className="w-4 h-4 text-[#002b5e]" />
-          </div>
-          <button onClick={() => navigate('/discover/goa')} className="hidden lg:block bg-[#002b5e] hover:bg-blue-900 text-white px-6 py-2.5 rounded-md font-bold text-sm transition-colors">
-            Enquire Now
-          </button>
-          
-          {user && (
-            <div className="hidden lg:flex items-center gap-2 cursor-pointer ml-4" onClick={() => navigate('/profile')}>
-              <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || 'User')}&background=002b5e&color=fff`} alt="User" className="w-8 h-8 rounded-full" />
+      <Navbar bg="white" expand="lg" className="shadow-sm py-2 px-3">
+        <Container fluid>
+          {/* LOGO */}
+          <Navbar.Brand as={Link} to="/" className="d-flex align-items-end gap-1 me-lg-5">
+            <div className="font-extrabold tracking-tight leading-none" style={{ color: '#002b5e', fontSize: '1.5rem', fontWeight: 800 }}>
+              <span style={{ fontSize: '2rem' }}>A</span>jay Modi
             </div>
-          )}
+            <div className="d-flex flex-column ms-1 leading-none mb-1">
+              <span style={{ color: '#002b5e', fontSize: '10px', fontWeight: 'bold', letterSpacing: '2px' }}>TRAVELS</span>
+              <span className="text-muted" style={{ fontSize: '6px', letterSpacing: '1px' }}>Dream. Travel. Explore.</span>
+            </div>
+          </Navbar.Brand>
 
-          {/* Mobile Menu Toggle */}
-          <button className="lg:hidden p-2 text-gray-600 focus:outline-none" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
+          <Navbar.Toggle aria-controls="main-navbar-nav" className="border-0 shadow-none" />
+          
+          <Navbar.Collapse id="main-navbar-nav">
+            <Nav className="mx-auto mb-2 mb-lg-0 fw-bold" style={{ fontSize: '14px' }}>
+              <Nav.Link as={Link} to="/" className="px-3" style={{ color: '#002b5e' }}>Home</Nav.Link>
+              <Nav.Link as={Link} to="/domestic-destinations" className="px-3" style={{ color: '#002b5e' }}>Domestic</Nav.Link>
+              <Nav.Link as={Link} to="/international-destinations" className="px-3" style={{ color: '#002b5e' }}>International</Nav.Link>
+              <Nav.Link as={Link} to="/weekend-gateways" className="px-3" style={{ color: '#002b5e' }}>Weekend Gateways</Nav.Link>
+              <Nav.Link as={Link} to="/packages" className="px-3" style={{ color: '#002b5e' }}>Packages</Nav.Link>
+              <Nav.Link as={Link} to="/deals" className="px-3" style={{ color: '#002b5e' }}>Deals</Nav.Link>
+              <NavDropdown title={<span style={{ color: '#002b5e' }}>About Us</span>} id="about-dropdown" className="px-1">
+                <NavDropdown.Item as={Link} to="/about">Our Story</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/contact">Contact Us</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+            
+            <div className="d-flex align-items-center gap-3 ms-lg-4 mt-3 mt-lg-0">
+              <Search className="d-none d-lg-block text-secondary" size={20} style={{ cursor: 'pointer' }} />
+              <div className="d-none d-lg-flex align-items-center justify-content-center bg-light rounded-circle" style={{ width: '36px', height: '36px', cursor: 'pointer' }}>
+                <Phone size={16} color="#002b5e" />
+              </div>
+              <button 
+                onClick={() => navigate('/discover/goa')} 
+                className="btn text-white fw-bold px-4" 
+                style={{ backgroundColor: '#002b5e', fontSize: '14px' }}
+              >
+                Enquire Now
+              </button>
 
-      {/* MOBILE MENU */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden absolute top-[100%] left-0 w-full bg-white border-b border-gray-100 shadow-xl z-50 flex flex-col py-4 px-6 max-h-[80vh] overflow-y-auto">
-          <NavLink to="/" onClick={() => setMobileMenuOpen(false)} className="py-3 font-semibold text-lg border-b border-gray-50 text-[#002b5e]">Home</NavLink>
-          <NavLink to="/domestic-destinations" onClick={() => setMobileMenuOpen(false)} className="py-3 font-semibold text-lg border-b border-gray-50 text-[#002b5e]">Domestic</NavLink>
-          <NavLink to="/international-destinations" onClick={() => setMobileMenuOpen(false)} className="py-3 font-semibold text-lg border-b border-gray-50 text-[#002b5e]">International</NavLink>
-          <NavLink to="/weekend-gateways" onClick={() => setMobileMenuOpen(false)} className="py-3 font-semibold text-lg border-b border-gray-50 text-[#002b5e]">Weekend Gateways</NavLink>
-          {!user && (
-            <button onClick={() => { navigate('/login'); setMobileMenuOpen(false); }} className="mt-4 bg-[#002b5e] text-white py-3 rounded-md font-bold w-full">
-              Sign In
-            </button>
-          )}
-        </div>
-      )}
+              {user ? (
+                <div className="ms-2" style={{ cursor: 'pointer' }} onClick={() => navigate('/profile')}>
+                  <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(user.name || 'User')}&background=002b5e&color=fff`} alt="User" className="rounded-circle" style={{ width: '32px', height: '32px' }} />
+                </div>
+              ) : (
+                <button 
+                  onClick={() => navigate('/login')} 
+                  className="btn btn-outline-primary d-lg-none mt-2 w-100 fw-bold" 
+                >
+                  Sign In
+                </button>
+              )}
+            </div>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     </header>
   );
 };

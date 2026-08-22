@@ -1,27 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 const TravelExperienceCard = ({ style }) => {
   const Icon = style.icon;
+  const [imgSrc, setImgSrc] = useState(style.image);
+  
   return (
-    <motion.div whileHover={{ y: -4 }} className="group block rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 relative">
-      <div className="relative aspect-[3/4] overflow-hidden">
-        <img src={style.image} alt={style.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 p-6 w-full">
-          <div className="bg-white/20 backdrop-blur-md w-12 h-12 rounded-full flex items-center justify-center text-white mb-4">
-            <Icon className="w-6 h-6" />
+    <motion.div 
+      whileHover={{ y: -8 }} 
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+      className="group block rounded-3xl overflow-hidden bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] transition-all duration-500 border border-gray-100 relative h-[420px]"
+    >
+      <div className="relative w-full h-full overflow-hidden">
+        {/* Background Image with Smooth Hover Zoom */}
+        <img 
+          src={imgSrc} 
+          alt={style.title} 
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" 
+          loading="lazy" 
+          onError={() => setImgSrc('https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?q=80&w=800')} 
+        />
+        
+        {/* Multi-stage Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-90 group-hover:opacity-95 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-blue-900/20 transition-colors duration-300" />
+
+        {/* Top Right Floating Badge */}
+        <div className="absolute top-5 right-5 z-10">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-semibold shadow-lg">
+            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            Featured
+          </span>
+        </div>
+
+        {/* Content Overlay */}
+        <div className="absolute bottom-0 left-0 p-8 w-full z-10 flex flex-col justify-end">
+          {/* Glass Icon Box */}
+          <div className="w-14 h-14 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 flex items-center justify-center text-white mb-5 group-hover:bg-primary group-hover:border-primary group-hover:scale-110 transition-all duration-300 shadow-lg">
+            <Icon className="w-7 h-7" />
           </div>
-          <h3 className="text-white text-2xl font-bold mb-2">{style.title}</h3>
-          <p className="text-white/80 text-sm mb-4 line-clamp-2">{style.description}</p>
-          <Link to={`/experiences/${style.id}`} className="text-white font-medium text-sm flex items-center group/link">
-            Explore <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover/link:translate-x-1" />
+
+          <h3 className="text-white text-2xl font-extrabold mb-2 tracking-tight group-hover:text-amber-300 transition-colors">
+            {style.title}
+          </h3>
+          
+          <p className="text-gray-200/90 text-sm mb-6 leading-relaxed line-clamp-2">
+            {style.description}
+          </p>
+
+          <Link 
+            to="/packages" 
+            className="inline-flex items-center text-white font-bold text-sm hover:text-amber-300 transition-colors group/link no-underline"
+          >
+            <span className="border-b border-white/40 group-hover/link:border-amber-300 pb-0.5 transition-colors">
+              Explore Packages
+            </span>
+            <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover/link:translate-x-2" />
           </Link>
         </div>
       </div>
     </motion.div>
   );
 };
+
 export default TravelExperienceCard;

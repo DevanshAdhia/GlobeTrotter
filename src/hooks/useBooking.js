@@ -34,7 +34,7 @@ export const useBooking = (destinationSlug, packageSlug) => {
   const transportCost = TRANSPORT_COSTS[transport] ?? 0;
 
   const estimatedTotal = pkg
-    ? calculateTotal(pkg.price, hotelCost, transportCost, selectedPlaces, selectedActivities)
+    ? calculateTotal(pkg.price, hotelCost, transportCost, selectedPlaces, selectedActivities, bookingData.adults, bookingData.children)
     : 0;
 
   const clearTrip = useCallback(() => {

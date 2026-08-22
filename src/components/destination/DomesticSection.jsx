@@ -10,7 +10,7 @@ const DomesticSection = () => {
   return (
     <section className="py-16 bg-gray-50">
       <Container>
-        <SectionHeader eyebrow="Incredible India" title="Explore India" description="Discover unforgettable journeys across India." actionText="View All Domestic Destinations" actionLink="/destinations?type=domestic" />
+        <SectionHeader eyebrow="Incredible India" title="Explore India" description="Discover unforgettable journeys across India." actionText="View All Domestic Destinations" actionLink="/domestic-destinations" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {domestic.map((dest, i) => (
             <motion.div key={dest.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>

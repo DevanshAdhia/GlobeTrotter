@@ -51,6 +51,11 @@ export const PUBLIC_ROUTES = [
   { path: '/plan-your-trip/:destinationSlug/:packageSlug', element: <PlanYourTrip /> },
   { path: '/review-trip/:destinationSlug/:packageSlug',    element: <ReviewTrip /> },
   { path: '/discover/:destinationSlug',                    element: <Discover /> },
+  { path: '/packages',                                     element: <PlaceholderPage title="Packages" /> },
+  { path: '/deals',                                        element: <PlaceholderPage title="Travel Deals" /> },
+  { path: '/about',                                        element: <PlaceholderPage title="About Us" /> },
+  { path: '/contact',                                      element: <PlaceholderPage title="Contact Us" /> },
+  { path: '*',                                             element: <PlaceholderPage title="Page Not Found" /> },
 ];
 
 export const PROTECTED_ROUTES = [

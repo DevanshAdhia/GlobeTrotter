@@ -13,7 +13,6 @@ import TravelExperiences from '../../components/common/TravelExperiences';
 import WhyChooseUs from '../../components/common/WhyChooseUs';
 import TravelCTA from '../../components/common/TravelCTA';
 import Testimonials from '../../components/common/Testimonials';
-import NewsletterSection from '../../components/common/NewsletterSection';
 import Footer from '../../components/layout/Footer';
 
 const Home = () => {
@@ -33,7 +32,6 @@ const Home = () => {
         <WhyChooseUs />
         <TravelCTA />
         <Testimonials />
-        <NewsletterSection />
       </main>
       <Footer />
     </div>

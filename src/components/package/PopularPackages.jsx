@@ -12,7 +12,7 @@ const PopularPackages = () => {
         <SectionHeader eyebrow="Best Sellers" title="Popular Tour Packages" description="Handpicked journeys for every kind of traveller." actionText="View All Packages" actionLink="/packages" />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {packages.map((pkg, i) => (
-            <motion.div key={pkg.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+            <motion.div key={pkg.slug} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
               <PackageCard pkg={pkg} />
             </motion.div>
           ))}

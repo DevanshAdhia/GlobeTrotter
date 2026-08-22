@@ -11,7 +11,7 @@ const DestinationCard = ({ destination }) => {
     toast('Log in to save destinations.', { icon: '🔒' });
   };
   return (
-    <Link to={`/discover/${destination.slug || ''}`} className="group block rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary">
+    <Link to={`/destinations/${destination.slug || ''}`} className="group block rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary">
       <div className="relative aspect-[4/3] overflow-hidden">
         <ImageSlider images={destination.image} alt={destination.name} className="transition-transform duration-500 group-hover:scale-105" />
       </div>

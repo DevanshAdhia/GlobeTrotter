@@ -6,16 +6,16 @@ export const RecommendedPlaceCard = ({ place, isSelected, isIncluded, onToggle }
   return (
     <motion.div 
       whileHover={!isIncluded ? { y: -4, scale: 1.01 } : {}}
-      className={`relative rounded-2xl overflow-hidden border-2 transition-all duration-300 bg-white
+      className={`relative rounded-2xl overflow-hidden border-2 transition-all duration-300 bg-white flex flex-col h-full
         ${isSelected || isIncluded ? 'border-primary shadow-md' : 'border-gray-100 shadow-sm hover:shadow-lg'}`}
     >
-      <div className="aspect-[4/3] relative">
+      <div className="aspect-[4/3] relative shrink-0">
         <img src={place.image} alt={place.name} className="w-full h-full object-cover" />
         <span className="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-1 rounded-md text-xs font-bold text-gray-800 shadow-sm">
           {place.category}
         </span>
       </div>
-      <div className="p-4 flex flex-col h-full">
+      <div className="p-4 flex flex-col flex-1">
         <h4 className="font-bold text-gray-900 mb-1">{place.name}</h4>
         <p className="text-sm text-gray-500 line-clamp-2 mb-3 flex-1">{place.description}</p>
         

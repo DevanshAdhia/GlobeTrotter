@@ -10,7 +10,7 @@ const InternationalSection = () => {
   return (
     <section className="py-16 bg-white">
       <Container>
-        <SectionHeader eyebrow="Global Experiences" title="Discover the World" description="International experiences designed for unforgettable memories." actionText="View All International Destinations" actionLink="/destinations?type=international" />
+        <SectionHeader eyebrow="Global Experiences" title="Discover the World" description="International experiences designed for unforgettable memories." actionText="View All International Destinations" actionLink="/international-destinations" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {intl.map((dest, i) => (
             <motion.div key={dest.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
