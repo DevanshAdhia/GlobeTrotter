@@ -1,7 +1,9 @@
 .admin-topbar {
   height: var(--topbar-height);
-  background-color: var(--background); /* Use background to blend with main area */
-  border-bottom: 1px solid var(--border);
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--glass-border);
   display: flex;
   align-items: center;
   justify-content: space-between;

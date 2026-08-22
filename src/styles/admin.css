@@ -90,45 +90,19 @@ button {
 .card {
   background-color: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl); /* Softer corners for premium feel */
+  border-radius: var(--radius-xl); 
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all var(--transition-bounce);
   position: relative;
   overflow: hidden;
   z-index: 1;
 }
 
-/* Premium top highlight effect on hover */
-.card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--info), var(--success));
-  background-size: 200% auto;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 2;
-  animation: gradient-shift 3s ease infinite;
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 .card:hover {
   box-shadow: var(--shadow-hover);
-  transform: translateY(-4px);
-  border-color: transparent;
-}
-
-.card:hover::after {
-  opacity: 1;
+  transform: translateY(-4px) scale(1.005);
+  border-color: rgba(79, 70, 229, 0.3);
 }
 
 .btn-primary {
