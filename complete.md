@@ -14,6 +14,13 @@ This repository contains the complete full-stack implementation of GlobeTrotter:
 
 ---
 
+## 🎥 Admin Panel Demo Video
+
+Check out the admin panel walkthrough here:
+[Watch Admin Panel Demo](https://github.com/DevanshAdhia/GlobeTrotter/blob/main/admin_demo.mp4)
+
+---
+
 ## 🛠️ Tech Stack & Prerequisites
 
 ### Backend:
