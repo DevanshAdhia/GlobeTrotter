@@ -63,7 +63,7 @@ const Discover = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
           {filteredDestinations.map(dest => (
             <div key={dest.id} className="card destination-card" style={{ padding: 0, overflow: 'hidden', cursor: 'pointer' }} onClick={() => navigate(`/destinations/${dest.id}`)}>
-              <div style={{ height: '200px', backgroundImage: `url(${dest.image})`, backgroundSize: 'cover', backgroundPosition: 'center top', position: 'relative' }}>
+              <div style={{ height: '200px', backgroundImage: `url(${dest.image})`, backgroundSize: 'cover', backgroundPosition: 'center', position: 'relative' }}>
                 <div style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(255,255,255,0.9)', padding: '0.25rem 0.75rem', borderRadius: '1rem', fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)' }}>
                   {dest.trend} Trending
                 </div>

@@ -74,7 +74,7 @@ const Home = () => {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
           {trendingDestinations.slice(0, 4).map(dest => (
             <div key={dest.id} className="card" style={{ padding: 0, overflow: 'hidden' }}>
-              <div style={{ height: '150px', backgroundImage: `url(${dest.image})`, backgroundSize: 'cover', backgroundPosition: 'center top' }}></div>
+              <div style={{ height: '150px', backgroundImage: `url(${dest.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
               <div style={{ padding: '1rem' }}>
                 <h4 style={{ margin: '0 0 0.25rem 0', fontSize: '1rem' }}>{dest.city}</h4>
                 <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.875rem' }}>{dest.country}</p>

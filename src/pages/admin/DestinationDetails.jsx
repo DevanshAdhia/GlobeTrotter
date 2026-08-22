@@ -57,17 +57,17 @@ const DestinationDetails = () => {
 
       <div className="card" style={{ padding: 0, overflow: 'hidden', border: 'none', position: 'relative' }}>
         <div style={{ 
-          height: '350px', 
+          height: '400px', 
           width: '100%', 
-          backgroundImage: `url(${dest.image.replace('w=400', 'w=1600')})`, 
-          backgroundSize: 'cover', 
-          backgroundPosition: 'center top',
+          backgroundImage: `url(${dest.image.replace('w=400', 'w=1600')})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           position: 'relative'
         }}>
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%)'
+            background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%)'
           }}></div>
           
           <div style={{

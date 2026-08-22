@@ -146,6 +146,17 @@
   border: 2px solid var(--background);
 }
 
+.notification-dot {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--success);
+  border: 2px solid var(--background);
+}
+
 .topbar-avatar {
   width: 32px;
   height: 32px;

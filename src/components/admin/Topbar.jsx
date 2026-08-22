@@ -1,14 +1,26 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Search, Bell, Menu, Moon, Sun, HelpCircle } from 'lucide-react';
 import { useAdmin } from '../../context/AdminContext';
 import './Topbar.css';
 
-const Topbar = ({ toggleMobileSidebar, openCommandPalette, pageTitle = "Dashboard", breadcrumbs = ["Overview", "Platform Performance"] }) => {
+const Topbar = ({ toggleMobileSidebar, openCommandPalette, pageTitle }) => {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const navigate = useNavigate();
-  const { notifications } = useAdmin();
+  const location = useLocation();
+  const { notifications, currentUser } = useAdmin();
   const unreadCount = notifications ? notifications.filter(n => !n.read).length : 0;
+
+  // Generate dynamic breadcrumbs
+  const pathnames = location.pathname.split('/').filter(x => x);
+  const breadcrumbs = pathnames.map((path, index) => {
+    // Capitalize first letter, handle IDs
+    if (!isNaN(path)) return 'Details';
+    return path.charAt(0).toUpperCase() + path.slice(1).replace(/-/g, ' ');
+  });
+  
+  // Dynamic page title if not explicitly provided
+  const derivedTitle = pageTitle || (breadcrumbs.length > 1 ? breadcrumbs[breadcrumbs.length - 1] : 'Dashboard');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -31,11 +43,11 @@ const Topbar = ({ toggleMobileSidebar, openCommandPalette, pageTitle = "Dashboar
             {breadcrumbs.map((crumb, idx) => (
               <span key={idx} className="breadcrumb-item">
                 {crumb}
-                {idx < breadcrumbs.length - 1 && <span className="breadcrumb-separator">/</span>}
+                {idx < breadcrumbs.length - 1 && <span className="breadcrumb-separator" style={{ margin: '0 0.5rem' }}>/</span>}
               </span>
             ))}
           </div>
-          <h1 className="page-title">{pageTitle}</h1>
+          <h1 className="page-title">{derivedTitle}</h1>
         </div>
       </div>
 
@@ -59,7 +71,7 @@ const Topbar = ({ toggleMobileSidebar, openCommandPalette, pageTitle = "Dashboar
           
           <button className="icon-btn notification-btn" title="Notifications" onClick={() => navigate('/admin/notifications')}>
             <Bell size={18} />
-            {unreadCount > 0 && <span className="notification-badge">{unreadCount}</span>}
+            {unreadCount > 0 && <span className="notification-dot"></span>}
           </button>
           
           <div className="topbar-profile" onClick={() => navigate('/admin/settings')} style={{ cursor: 'pointer' }} title="Settings">
