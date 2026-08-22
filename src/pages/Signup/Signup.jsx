@@ -81,7 +81,10 @@ const Signup = () => {
     }
   };
 
+  return (
     <AuthLayout>
+
+
       <div>
         <h1 className="text-xl font-bold text-gray-900 mb-1">Create Your Account</h1>
         <p className="text-sm text-gray-500 mb-6">Sign up to start your travel journey</p>
