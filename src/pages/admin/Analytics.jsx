@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
 import ChartCard from '../../components/admin/ChartCard';
 
 const Analytics = () => {
@@ -21,12 +21,21 @@ const Analytics = () => {
     { name: 'Shopping', value: 5 },
   ];
 
-  const travelTypeData = [
-    { name: 'Solo', value: 38 },
-    { name: 'Couple', value: 26 },
-    { name: 'Friends', value: 21 },
-    { name: 'Family', value: 12 },
-    { name: 'Business', value: 3 },
+  const tripsCreatedData = [
+    { month: 'Jan', created: 120, completed: 90 },
+    { month: 'Feb', created: 150, completed: 110 },
+    { month: 'Mar', created: 280, completed: 190 },
+    { month: 'Apr', created: 350, completed: 250 },
+    { month: 'May', created: 480, completed: 320 },
+    { month: 'Jun', created: 520, completed: 410 },
+  ];
+
+  const cityEngagementData = [
+    { city: 'Goa', engagement: 95 },
+    { city: 'Jaipur', engagement: 82 },
+    { city: 'Kerala', engagement: 78 },
+    { city: 'Manali', engagement: 70 },
+    { city: 'Udaipur', engagement: 65 },
   ];
 
   const COLORS = ['var(--primary)', 'var(--info)', 'var(--success)', 'var(--warning)', 'var(--danger)', '#8b5cf6'];
@@ -75,17 +84,53 @@ const Analytics = () => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
-        {renderDonutChart('Most Popular Travel Styles', travelStyleData)}
-        {renderDonutChart('Travel Types', travelTypeData)}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+        <div className="card">
+          <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Trips Created vs Completed</h3>
+          <div style={{ height: '300px' }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={tripsCreatedData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                <defs>
+                  <linearGradient id="colorCreated" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.8}/>
+                    <stop offset="95%" stopColor="var(--primary)" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                <RechartsTooltip contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)', borderRadius: 'var(--radius-md)' }} />
+                <Area type="monotone" dataKey="created" stroke="var(--primary)" fillOpacity={1} fill="url(#colorCreated)" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="card">
+          <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Top Cities Engagement</h3>
+          <div style={{ height: '300px' }}>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={cityEngagementData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+                <XAxis dataKey="city" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
+                <RechartsTooltip contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)', borderRadius: 'var(--radius-md)' }} cursor={{fill: 'var(--background)'}} />
+                <Bar dataKey="engagement" fill="var(--info)" radius={[4, 4, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       </div>
 
-      <ChartCard 
-        title="User Retention (Cohort Analysis)" 
-        data={userRetentionData}
-        dataKeys={['retention']}
-        colors={['var(--primary)']}
-      />
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+        {renderDonutChart('Most Popular Travel Styles', travelStyleData)}
+        <ChartCard 
+          title="User Retention (Cohort Analysis)" 
+          data={userRetentionData}
+          dataKeys={['retention']}
+          colors={['var(--success)']}
+        />
+      </div>
     </div>
   );
 };
