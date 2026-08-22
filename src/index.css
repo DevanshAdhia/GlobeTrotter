@@ -186,3 +186,53 @@ html body button.filter-pill-inactive:hover {
   border-color: #93c5fd !important;
   box-shadow: 0 2px 8px rgba(0, 71, 179, 0.08) !important;
 }
+
+/* Force Travel CTA Buttons against Bootstrap resets */
+html body a.cta-btn-primary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.625rem !important;
+  padding: 0.95rem 2.25rem !important;
+  border-radius: 1rem !important;
+  font-size: 1rem !important;
+  font-weight: 800 !important;
+  background-color: #ffffff !important;
+  color: #002b5e !important;
+  text-decoration: none !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.3s ease !important;
+}
+
+html body a.cta-btn-primary:hover {
+  background-color: #fde047 !important;
+  color: #001d42 !important;
+  border-color: #fde047 !important;
+  box-shadow: 0 14px 30px rgba(253, 224, 71, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+html body a.cta-btn-secondary {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.625rem !important;
+  padding: 0.95rem 2.25rem !important;
+  border-radius: 1rem !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  backdrop-filter: blur(12px) !important;
+  transition: all 0.3s ease !important;
+}
+
+html body a.cta-btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.22) !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+}

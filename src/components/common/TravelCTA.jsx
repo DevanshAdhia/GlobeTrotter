@@ -54,20 +54,21 @@ const TravelCTA = () => {
             whileInView={{ opacity: 1, y: 0 }} 
             viewport={{ once: true }} 
             transition={{ delay: 0.2 }} 
-            className="flex flex-col sm:flex-row items-center justify-center gap-5"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Link 
               to="/about" 
-              className="w-full sm:w-auto bg-white hover:bg-amber-300 text-[#002b5e] hover:text-[#001d42] px-9 py-4 rounded-2xl font-extrabold text-base transition-all duration-300 shadow-xl hover:scale-105 active:scale-95 no-underline flex items-center justify-center gap-2"
+              className="cta-btn-primary w-full sm:w-auto"
             >
               <span>Plan My Trip</span>
+              <Compass className="w-4 h-4 shrink-0" />
             </Link>
 
             <Link 
               to="/contact" 
-              className="w-full sm:w-auto bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-9 py-4 rounded-2xl font-bold text-base transition-all duration-300 hover:scale-105 active:scale-95 no-underline flex items-center justify-center gap-2"
+              className="cta-btn-secondary w-full sm:w-auto"
             >
-              <PhoneCall className="w-4 h-4" />
+              <PhoneCall className="w-4 h-4 shrink-0 text-amber-300" />
               <span>Talk to an Expert</span>
             </Link>
           </motion.div>
