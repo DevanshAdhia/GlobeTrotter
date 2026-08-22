@@ -1,108 +1,34 @@
-.page-container {
+/* Table-specific styles for Users */
+.table-user-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.table-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.table-user-info {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 1.5rem;
-}
-
-.page-header h2 {
-  font-size: 1.75rem;
-  margin-bottom: 0.5rem;
+.table-user-name {
+  font-weight: 500;
   color: var(--text-primary);
 }
 
-.page-subtitle {
+.table-user-email {
+  font-size: 0.75rem;
   color: var(--text-secondary);
-  margin: 0;
-}
-
-.page-actions {
-  display: flex;
-  gap: 1rem;
-}
-
-.controls-bar {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.search-box {
-  display: flex;
-  align-items: center;
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 0.5rem 1rem;
-  flex: 1;
-  max-width: 400px;
-}
-
-.search-icon, .filter-icon {
-  color: var(--text-muted);
-  margin-right: 0.75rem;
-}
-
-.search-box input {
-  border: none;
-  background: transparent;
-  outline: none;
-  color: var(--text-primary);
-  width: 100%;
-  font-size: 0.875rem;
-}
-
-.filter-box {
-  display: flex;
-  align-items: center;
-  background-color: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 0.5rem 1rem;
-}
-
-.filter-box select {
-  border: none;
-  background: transparent;
-  outline: none;
-  color: var(--text-primary);
-  font-size: 0.875rem;
-  cursor: pointer;
-}
-
-.pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-}
-
-.page-info {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-}
-
-@media (max-width: 768px) {
-  .page-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-  
-  .controls-bar {
-    flex-direction: column;
-  }
-  
-  .search-box {
-    max-width: 100%;
-  }
 }

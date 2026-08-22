@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useAdmin } from '../../context/AdminContext';
 import { useNavigate } from 'react-router-dom';
+import { Search } from 'lucide-react';
 import DataTable from '../../components/admin/DataTable';
 import Modal from '../../components/admin/Modal';
 
 const Destinations = () => {
   const { destinations, addDestination } = useAdmin();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Form State
@@ -29,13 +31,26 @@ const Destinations = () => {
     setNewDest({ city: '', country: '', image: '', searches: '' });
   };
 
+  const filteredDestinations = destinations.filter(dest => 
+    dest.city.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    dest.country.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const columns = [
     {
       header: 'Destination',
       accessor: 'city',
       render: (row) => (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', cursor: 'pointer' }} onClick={() => navigate(`/admin/destinations/${row.id}`)}>
-          <img src={row.image} alt={row.city} style={{ width: '40px', height: '40px', borderRadius: '4px', objectFit: 'cover' }} />
+        <div className="destination-cell" style={{ display: 'flex', alignItems: 'center', gap: '1rem', cursor: 'pointer' }} onClick={() => navigate(`/admin/destinations/${row.id}`)}>
+          <div style={{ overflow: 'hidden', borderRadius: 'var(--radius-md)', width: '48px', height: '48px' }}>
+            <img 
+              src={row.image} 
+              alt={row.city} 
+              style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform var(--transition-normal)' }} 
+              onMouseOver={e => e.currentTarget.style.transform = 'scale(1.1)'}
+              onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+            />
+          </div>
           <div>
             <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{row.city}</div>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{row.country}</div>
@@ -66,10 +81,22 @@ const Destinations = () => {
           <button className="btn-primary" onClick={() => setIsModalOpen(true)}>Add Destination</button>
         </div>
       </div>
+      <div className="controls-bar">
+        <div className="search-box">
+          <Search size={18} className="search-icon" />
+          <input 
+            type="text" 
+            placeholder="Search cities or countries..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
+
       <DataTable 
-        title="All Destinations"
+        title={`All Destinations (${filteredDestinations.length})`}
         columns={columns}
-        data={destinations}
+        data={filteredDestinations}
         onActionClick={(row) => navigate(`/admin/destinations/${row.id}`)}
       />
 

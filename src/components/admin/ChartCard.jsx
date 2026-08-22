@@ -5,8 +5,8 @@ import './ChartCard.css';
 const ChartCard = ({ title, data, dataKeys, colors, height = 300 }) => {
   const [timeframe, setTimeframe] = useState('7D');
 
-  // data should be an object with keys: 7D, 30D, 90D, 1Y
-  const chartData = data[timeframe] || data['7D'] || [];
+  const isArrayData = Array.isArray(data);
+  const chartData = isArrayData ? data : (data[timeframe] || data['7D'] || []);
 
   const formatYAxis = (tickItem) => {
     if (tickItem >= 1000000) return (tickItem / 1000000).toFixed(1) + 'M';
@@ -36,18 +36,20 @@ const ChartCard = ({ title, data, dataKeys, colors, height = 300 }) => {
     <div className="card chart-card">
       <div className="chart-header">
         <h3 className="chart-title">{title}</h3>
-        <div className="chart-controls">
-          <select 
-            className="chart-select" 
-            value={timeframe} 
-            onChange={(e) => setTimeframe(e.target.value)}
-          >
-            <option value="7D">7D</option>
-            <option value="30D">30D</option>
-            <option value="90D">90D</option>
-            <option value="1Y">1Y</option>
-          </select>
-        </div>
+        {!isArrayData && (
+          <div className="chart-controls">
+            <select 
+              className="chart-select" 
+              value={timeframe} 
+              onChange={(e) => setTimeframe(e.target.value)}
+            >
+              <option value="7D">7D</option>
+              <option value="30D">30D</option>
+              <option value="90D">90D</option>
+              <option value="1Y">1Y</option>
+            </select>
+          </div>
+        )}
       </div>
       <div className="chart-container" style={{ height }}>
         <ResponsiveContainer width="100%" height="100%">

@@ -38,7 +38,29 @@ const Analytics = () => {
     { city: 'Udaipur', engagement: 65 },
   ];
 
-  const COLORS = ['var(--primary)', 'var(--info)', 'var(--success)', 'var(--warning)', 'var(--danger)', '#8b5cf6'];
+  const formatYAxis = (tickItem) => {
+    if (tickItem >= 1000000) return (tickItem / 1000000).toFixed(1) + 'M';
+    if (tickItem >= 1000) return (tickItem / 1000).toFixed(0) + 'k';
+    return tickItem;
+  };
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-chart-tooltip">
+          <p className="tooltip-label">{label}</p>
+          {payload.map((entry, index) => (
+            <div key={`item-${index}`} className="tooltip-item">
+              <div className="tooltip-color-indicator" style={{ backgroundColor: entry.color || entry.payload.fill || 'var(--primary)' }}></div>
+              <span className="tooltip-name">{entry.name}:</span>
+              <span className="tooltip-value">{entry.value.toLocaleString()}</span>
+            </div>
+          ))}
+        </div>
+      );
+    }
+    return null;
+  };
 
   const renderDonutChart = (title, data) => (
     <div className="card">
@@ -57,10 +79,7 @@ const Analytics = () => {
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
-            <RechartsTooltip 
-              contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)', borderRadius: 'var(--radius-md)' }}
-              itemStyle={{ color: 'var(--text-primary)' }}
-            />
+            <RechartsTooltip content={<CustomTooltip />} />
           </PieChart>
         </ResponsiveContainer>
       </div>
@@ -89,7 +108,7 @@ const Analytics = () => {
           <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Trips Created vs Completed</h3>
           <div style={{ height: '300px' }}>
             <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={tripsCreatedData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+              <AreaChart data={tripsCreatedData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <defs>
                   <linearGradient id="colorCreated" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.8}/>
@@ -97,9 +116,9 @@ const Analytics = () => {
                   </linearGradient>
                 </defs>
                 <XAxis dataKey="month" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} tickFormatter={formatYAxis} width={35} />
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
-                <RechartsTooltip contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)', borderRadius: 'var(--radius-md)' }} />
+                <RechartsTooltip content={<CustomTooltip />} cursor={{ stroke: 'var(--border)', strokeWidth: 1, strokeDasharray: '3 3' }} />
                 <Area type="monotone" dataKey="created" stroke="var(--primary)" fillOpacity={1} fill="url(#colorCreated)" />
               </AreaChart>
             </ResponsiveContainer>
@@ -110,11 +129,11 @@ const Analytics = () => {
           <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1.5rem', color: 'var(--text-primary)' }}>Top Cities Engagement</h3>
           <div style={{ height: '300px' }}>
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={cityEngagementData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+              <BarChart data={cityEngagementData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <XAxis dataKey="city" stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} />
+                <YAxis stroke="var(--text-muted)" fontSize={12} tickLine={false} axisLine={false} tickFormatter={formatYAxis} width={35} />
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
-                <RechartsTooltip contentStyle={{ backgroundColor: 'var(--surface)', borderColor: 'var(--border)', borderRadius: 'var(--radius-md)' }} cursor={{fill: 'var(--background)'}} />
+                <RechartsTooltip content={<CustomTooltip />} cursor={{fill: 'var(--background)'}} />
                 <Bar dataKey="engagement" fill="var(--info)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>

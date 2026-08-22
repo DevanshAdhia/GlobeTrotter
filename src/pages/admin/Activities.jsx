@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { useAdmin } from '../../context/AdminContext';
 import { useNavigate } from 'react-router-dom';
+import { Search } from 'lucide-react';
 import DataTable from '../../components/admin/DataTable';
 import Modal from '../../components/admin/Modal';
 
 const Activities = () => {
   const { activities, addActivity } = useAdmin();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Form State
@@ -29,6 +31,12 @@ const Activities = () => {
     setIsModalOpen(false);
     setNewAct({ activity: '', category: 'Sightseeing', destination: '' });
   };
+
+  const filteredActivities = activities.filter(act => 
+    act.activity.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    act.destination.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    act.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const columns = [
     { 
@@ -55,10 +63,22 @@ const Activities = () => {
           <button className="btn-primary" onClick={() => setIsModalOpen(true)}>Add Activity</button>
         </div>
       </div>
+      <div className="controls-bar">
+        <div className="search-box">
+          <Search size={18} className="search-icon" />
+          <input 
+            type="text" 
+            placeholder="Search activities, destinations, or categories..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </div>
+
       <DataTable 
-        title="All Activities"
+        title={`All Activities (${filteredActivities.length})`}
         columns={columns}
-        data={activities}
+        data={filteredActivities}
         onActionClick={(row) => navigate(`/admin/activities/${row.id}`)}
       />
 
