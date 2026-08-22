@@ -24,9 +24,9 @@ const ActivityDetails = () => {
     { name: 'Week 4', views: parseInt(act.searches.toString().replace(/,/g, '')) / 5 || 500, added: parseInt(act.addedToTrips.toString().replace(/,/g, '')) / 5 || 100 },
   ];
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this activity?')) {
-      deleteActivity(act.id);
+      await deleteActivity(act.id);
       navigate('/admin/activities');
     }
   };

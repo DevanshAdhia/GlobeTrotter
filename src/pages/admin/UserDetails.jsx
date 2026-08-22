@@ -11,7 +11,7 @@ const UserDetails = () => {
   const { users, updateUserStatus, deleteUser, editUser, trips } = useAdmin();
   
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editFormData, setEditFormData] = useState({ user: '', email: '' });
+  const [editFormData, setEditFormData] = useState({ name: '', email: '' });
   
   const user = users.find(u => u.id === parseInt(id));
 
@@ -25,11 +25,11 @@ const UserDetails = () => {
   }
 
   // Dynamic stats
-  const userTrips = trips.filter(t => t.owner === user.user);
-  const publicTripsCount = userTrips.filter(t => t.visibility === 'Public').length;
+  const userTrips = trips.filter(t => t.user_id === user.id);
+  const publicTripsCount = userTrips.filter(t => t.visibility === 'Public' || t.status === 'published').length;
 
   const handleSuspend = () => {
-    updateUserStatus(user.id, user.status === 'Suspended' ? 'Active' : 'Suspended');
+    updateUserStatus(user.id, !user.is_active);
   };
 
   const handleDelete = () => {
@@ -40,16 +40,15 @@ const UserDetails = () => {
   };
 
   const handleOpenEdit = () => {
-    setEditFormData({ user: user.user, email: user.email });
+    setEditFormData({ name: user.name || '', email: user.email });
     setIsEditModalOpen(true);
   };
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
     editUser(user.id, { 
-      user: editFormData.user, 
-      email: editFormData.email,
-      avatar: editFormData.user.charAt(0).toUpperCase()
+      name: editFormData.name, 
+      email: editFormData.email
     });
     setIsEditModalOpen(false);
   };
@@ -62,55 +61,53 @@ const UserDetails = () => {
         </button>
       </div>
 
-      <div className="card" style={{ padding: 0, overflow: 'hidden', border: 'none', position: 'relative' }}>
-        <div style={{
-          height: '180px',
-          width: '100%',
-          background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-          position: 'relative'
-        }}>
-          <div style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
-          }}></div>
-        </div>
-
-        <div style={{ padding: '0 2.5rem 2rem 2.5rem', display: 'flex', flexDirection: 'column' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginTop: '-40px' }}>
-            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'flex-end' }}>
-              <div style={{ 
-                width: '100px', height: '100px', 
-                borderRadius: '50%', 
-                background: 'var(--surface)', 
-                display: 'flex', justifyContent: 'center', alignItems: 'center', 
-                fontSize: '3rem', fontWeight: 'bold', color: 'var(--primary)',
-                boxShadow: '0 8px 16px rgba(0,0,0,0.1)', border: '4px solid var(--surface)'
-              }}>
-                {user.avatar}
-              </div>
-              <div style={{ paddingBottom: '0.5rem' }}>
-                <h2 style={{ fontSize: '2rem', margin: '0 0 0.25rem 0' }}>{user.user}</h2>
-                <div style={{ display: 'flex', gap: '1rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><Mail size={14} /> {user.email}</span>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><Calendar size={14} /> Joined {user.joined}</span>
-                </div>
-              </div>
+      <div className="card" style={{ padding: '2.5rem 2rem', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden', border: '1px solid var(--border)', background: 'var(--surface)' }}>
+        {/* Subtle decorative glow */}
+        <div style={{ position: 'absolute', top: '-100px', right: '-100px', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(59,130,246,0.08) 0%, rgba(0,0,0,0) 70%)', borderRadius: '50%', pointerEvents: 'none' }}></div>
+        
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1.5rem', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'flex', gap: '1.75rem', alignItems: 'center' }}>
+            <div style={{ 
+              width: '90px', height: '90px', 
+              borderRadius: '50%', 
+              background: 'linear-gradient(135deg, var(--surface-light) 0%, var(--background) 100%)', 
+              display: 'flex', justifyContent: 'center', alignItems: 'center',
+              fontSize: '3rem', fontWeight: 'bold', color: 'var(--primary)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.15), inset 0 1px 1px rgba(255,255,255,0.05)', 
+              border: '1px solid var(--border)',
+              lineHeight: 1
+            }}>
+              <span style={{ display: 'block', marginTop: '0.1em' }}>
+                {user.profile_photo || (user.name ? user.name.charAt(0).toUpperCase() : user.email?.charAt(0).toUpperCase() || 'U')}
+              </span>
             </div>
             
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '50px' }}>
-              <button className="btn-secondary flex-center gap-sm" onClick={handleOpenEdit}><Edit size={16} /> Edit Profile</button>
-              <button className={`btn-secondary flex-center gap-sm`} onClick={handleSuspend} style={{ color: user.status === 'Suspended' ? 'var(--success)' : 'var(--warning)' }}>
-                <ShieldBan size={16} /> {user.status === 'Suspended' ? 'Activate' : 'Suspend'}
-              </button>
-              <button className="btn-danger flex-center gap-sm" onClick={handleDelete}><Trash2 size={16} /> Delete</button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <h2 style={{ fontSize: '1.875rem', margin: 0, fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
+                  {user.name || 'Unnamed User'}
+                </h2>
+                <span className={`status-badge status-${user.is_active ? 'success' : 'danger'}`} style={{ padding: '0.25rem 0.75rem', fontSize: '0.75rem', border: `1px solid ${user.is_active ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)'}` }}>
+                  {user.is_active ? 'Active' : 'Inactive'}
+                </span>
+              </div>
+              <div style={{ display: 'flex', gap: '1.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}><Mail size={15} /> {user.email}</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}><Calendar size={15} /> Joined {user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}</span>
+              </div>
             </div>
           </div>
           
-          <div style={{ marginTop: '2rem' }}>
-             <span className={`status-badge status-${user.status.toLowerCase() === 'active' ? 'success' : user.status.toLowerCase() === 'suspended' ? 'danger' : 'warning'}`}>
-              Status: {user.status}
-            </span>
+          <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+            <button className="btn-secondary flex-center gap-sm" onClick={handleOpenEdit} style={{ padding: '0.5rem 1rem', background: 'transparent', border: '1px solid var(--border)' }}>
+              <Edit size={16} /> Edit Profile
+            </button>
+            <button className={`btn-secondary flex-center gap-sm`} onClick={handleSuspend} style={{ padding: '0.5rem 1rem', background: 'transparent', color: !user.is_active ? 'var(--success)' : 'var(--warning)', border: `1px solid ${!user.is_active ? 'rgba(16, 185, 129, 0.3)' : 'rgba(245, 158, 11, 0.3)'}` }}>
+              <ShieldBan size={16} /> {!user.is_active ? 'Activate' : 'Suspend'}
+            </button>
+            <button className="btn-danger flex-center gap-sm" onClick={handleDelete} style={{ padding: '0.5rem 1rem', background: 'transparent', border: '1px solid rgba(239, 68, 68, 0.3)', color: 'var(--danger)' }}>
+              <Trash2 size={16} /> Delete
+            </button>
           </div>
         </div>
       </div>
@@ -158,7 +155,7 @@ const UserDetails = () => {
         <form onSubmit={handleEditSubmit}>
           <div className="form-group">
             <label>Full Name</label>
-            <input type="text" value={editFormData.user} onChange={e => setEditFormData({...editFormData, user: e.target.value})} required />
+            <input type="text" value={editFormData.name} onChange={e => setEditFormData({...editFormData, name: e.target.value})} required />
           </div>
           <div className="form-group">
             <label>Email Address</label>

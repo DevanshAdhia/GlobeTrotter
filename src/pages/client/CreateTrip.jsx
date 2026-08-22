@@ -13,11 +13,11 @@ const CreateTrip = () => {
     description: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.trip) return;
     
-    const newTripId = createTrip(formData);
+    const newTripId = await createTrip(formData);
     // After creating, redirect to the itinerary builder
     navigate(`/trips/${newTripId}/builder`);
   };

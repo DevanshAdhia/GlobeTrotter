@@ -5,6 +5,7 @@
  */
 export const downloadCSV = (data, filename) => {
   if (!data || !data.length) {
+    alert("No data available to export. Please add some data first.");
     console.warn("No data to export.");
     return;
   }
@@ -21,23 +22,23 @@ export const downloadCSV = (data, filename) => {
   // Add data rows
   for (const row of data) {
     const values = headers.map(header => {
-      const escaped = ('' + (row[header] || '')).replace(/"/g, '""');
+      const val = row[header];
+      const strVal = val !== null && val !== undefined ? String(val) : '';
+      const escaped = strVal.replace(/"/g, '""');
       return `"${escaped}"`;
     });
     csvRows.push(values.join(','));
   }
   
   const csvString = csvRows.join('\n');
-  const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+  const encodedUri = "data:text/csv;charset=utf-8," + encodeURIComponent(csvString);
   
   const link = document.createElement('a');
-  if (link.download !== undefined) {
-    const url = URL.createObjectURL(blob);
-    link.setAttribute('href', url);
-    link.setAttribute('download', `${filename}.csv`);
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
+  link.setAttribute('href', encodedUri);
+  link.setAttribute('download', `${filename}.csv`);
+  link.style.display = 'none';
+  
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 };

@@ -17,8 +17,8 @@ const Trips = () => {
   const [newTrip, setNewTrip] = useState({ trip: '', destinations: '', owner: users[0]?.user || '', dates: '', budget: '', visibility: 'Private' });
 
   const filteredTrips = trips.filter(trip => {
-    const matchesSearch = trip.trip.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          trip.owner.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (trip.name || '').toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          (trip.user_id?.toString() || '').toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'All' || trip.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
@@ -30,12 +30,10 @@ const Trips = () => {
   const handleExport = () => {
     const exportData = filteredTrips.map(t => ({
       ID: t.id,
-      TripName: t.trip,
-      Destinations: t.destinations,
-      Owner: t.owner,
-      Dates: t.dates,
-      Budget: t.budget,
-      Visibility: t.visibility,
+      TripName: t.name,
+      OwnerID: t.user_id,
+      Dates: `${t.start_date} to ${t.end_date}`,
+      Budget: `${t.currency} ${t.total_budget || 0}`,
       Status: t.status
     }));
     downloadCSV(exportData, 'globetrotter_trips');
@@ -62,18 +60,17 @@ const Trips = () => {
   const columns = [
     { 
       header: 'Trip', 
-      accessor: 'trip',
+      accessor: 'name',
       render: (row) => (
         <div onClick={() => navigate(`/admin/trips/${row.id}`)} style={{cursor: 'pointer'}}>
-          <div style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{row.trip}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>{row.destinations}</div>
+          <div style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{row.name}</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>{row.stops?.length || 0} stops</div>
         </div>
       )
     },
-    { header: 'Owner', accessor: 'owner' },
-    { header: 'Dates', accessor: 'dates' },
-    { header: 'Budget', accessor: 'budget' },
-    { header: 'Visibility', accessor: 'visibility' },
+    { header: 'Owner ID', accessor: 'user_id' },
+    { header: 'Dates', render: (row) => <span>{row.start_date} to {row.end_date}</span> },
+    { header: 'Budget', render: (row) => <span>{row.currency} {row.total_budget || 0}</span> },
     { header: 'Status', accessor: 'status', isStatus: true }
   ];
 

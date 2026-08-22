@@ -33,23 +33,20 @@ const Activities = () => {
   };
 
   const filteredActivities = activities.filter(act => 
-    act.activity.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    act.destination.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    act.category.toLowerCase().includes(searchTerm.toLowerCase())
+    (act.name || '').toLowerCase().includes(searchTerm.toLowerCase()) || 
+    (act.city_id?.toString() || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const columns = [
     { 
       header: 'Activity', 
-      accessor: 'activity', 
-      render: (row) => <strong style={{ color: 'var(--text-primary)', cursor: 'pointer' }} onClick={() => navigate(`/admin/activities/${row.id}`)}>{row.activity}</strong> 
+      accessor: 'name', 
+      render: (row) => <strong style={{ color: 'var(--text-primary)', cursor: 'pointer' }} onClick={() => navigate(`/admin/activities/${row.id}`)}>{row.name}</strong> 
     },
-    { header: 'Category', accessor: 'category' },
-    { header: 'Destination', accessor: 'destination' },
-    { header: 'Rating', accessor: 'rating', render: (row) => <span>⭐ {row.rating}</span> },
-    { header: 'Searches', accessor: 'searches' },
-    { header: 'Added to Trips', accessor: 'addedToTrips' },
-    { header: 'Trend', accessor: 'trend', render: (row) => <span style={{color: 'var(--success)', fontWeight: 600}}>{row.trend}</span> }
+    { header: 'Destination ID', accessor: 'city_id' },
+    { header: 'Duration', render: (row) => <span>{row.duration_minutes ? `${row.duration_minutes}m` : 'N/A'}</span> },
+    { header: 'Rating', accessor: 'rating', render: (row) => <span>⭐ {row.rating || 'N/A'}</span> },
+    { header: 'Price', render: (row) => <span>{row.currency || '$'}{row.price || 0}</span> }
   ];
 
   return (

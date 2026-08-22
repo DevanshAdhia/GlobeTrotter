@@ -24,9 +24,9 @@ const TripDetails = () => {
     );
   }
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this trip?')) {
-      deleteTrip(trip.id);
+      await deleteTrip(trip.id);
       navigate('/admin/trips');
     }
   };
@@ -41,9 +41,9 @@ const TripDetails = () => {
     setIsEditModalOpen(true);
   };
 
-  const handleEditSubmit = (e) => {
+  const handleEditSubmit = async (e) => {
     e.preventDefault();
-    editTrip(trip.id, editFormData);
+    await editTrip(trip.id, editFormData);
     setIsEditModalOpen(false);
   };
 

@@ -79,13 +79,13 @@ const Reports = () => {
               <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <button 
                   className="btn-danger" 
-                  onClick={() => { resolveReport(selectedReport.id, 'Resolved'); setSelectedReport(null); }}
+                  onClick={async () => { await resolveReport(selectedReport.id, 'Resolved'); setSelectedReport(null); }}
                 >
                   Hide Content / Suspend User
                 </button>
                 <button 
                   className="btn-secondary" 
-                  onClick={() => { resolveReport(selectedReport.id, 'Dismissed'); setSelectedReport(null); }}
+                  onClick={async () => { await resolveReport(selectedReport.id, 'Dismissed'); setSelectedReport(null); }}
                 >
                   Dismiss Report
                 </button>

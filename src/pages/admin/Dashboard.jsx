@@ -5,11 +5,8 @@ import DataTable from '../../components/admin/DataTable';
 import ProgressBar from '../../components/admin/ProgressBar';
 
 import { kpiData, userGrowthData, tripActivityData, platformHealth } from '../../data/analytics';
-import { trendingDestinations } from '../../data/destinations';
-import { popularActivities } from '../../data/activities';
-import { recentUsers } from '../../data/users';
-import { recentTrips } from '../../data/trips';
 import { downloadCSV } from '../../utils/exportUtils';
+import { useAdmin } from '../../context/AdminContext';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -17,44 +14,61 @@ import './Dashboard.css';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { dashboardMetrics, isLoading, users, trips, destinations, activities } = useAdmin();
   const [globalTimeframe, setGlobalTimeframe] = useState('30D');
 
-  const currentKpis = kpiData[globalTimeframe] || kpiData['30D'];
+  if (isLoading) {
+    return <div className="dashboard-container flex-center" style={{ minHeight: '60vh' }}><h3>Loading Dashboard Data...</h3></div>;
+  }
+
+  const m = dashboardMetrics || {};
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
+  };
+
+  const getTrend = (value, defaultTrend) => {
+    return (value === 0 || !value) ? '+0%' : defaultTrend;
+  };
 
   const userColumns = [
     { 
       header: 'User', 
-      accessor: 'user',
-      render: (row) => (
-        <div className="table-user-cell">
-          <div className="table-avatar">{row.avatar}</div>
-          <div className="table-user-info">
-            <span className="table-user-name">{row.user}</span>
-            <span className="table-user-email">{row.email}</span>
+      accessor: 'name',
+      render: (row) => {
+        const initial = row.name ? row.name.charAt(0) : (row.email ? row.email.charAt(0) : 'U');
+        return (
+          <div className="table-user-cell">
+            <div className="table-avatar">{row.profile_photo || initial.toUpperCase()}</div>
+            <div className="table-user-info">
+              <span className="table-user-name">{row.name || 'Unnamed User'}</span>
+              <span className="table-user-email">{row.email}</span>
+            </div>
           </div>
-        </div>
-      )
+        );
+      }
     },
-    { header: 'Joined', accessor: 'joined' },
-    { header: 'Trips', accessor: 'trips' },
-    { header: 'Status', accessor: 'status', isStatus: true }
+    { header: 'Role', accessor: 'role' },
+    { header: 'Status', render: (row) => <span className={`status-badge ${row.is_active ? 'status-success' : 'status-danger'}`}>{row.is_active ? 'Active' : 'Inactive'}</span> }
   ];
 
   const tripColumns = [
     { 
       header: 'Trip', 
-      accessor: 'trip',
+      accessor: 'name',
       render: (row) => (
         <div>
-          <div style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{row.trip}</div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>{row.destinations}</div>
+          <div style={{ fontWeight: 500, color: 'var(--text-primary)' }}>{row.name}</div>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>{row.stops?.length || 0} stops</div>
         </div>
       )
     },
-    { header: 'Owner', accessor: 'owner' },
-    { header: 'Dates', accessor: 'dates' },
-    { header: 'Budget', accessor: 'budget' },
-    { header: 'Visibility', accessor: 'visibility' },
+    { header: 'Owner ID', accessor: 'user_id' },
+    { header: 'Dates', render: (row) => <span>{row.start_date} to {row.end_date}</span> },
+    { header: 'Budget', render: (row) => <span>{row.currency} {row.total_budget || 0}</span> },
     { header: 'Status', accessor: 'status', isStatus: true }
   ];
 
@@ -63,7 +77,7 @@ const Dashboard = () => {
       {/* Hero Section */}
       <div className="dashboard-hero">
         <div className="hero-content">
-          <h2>Good morning, Admin 👋</h2>
+          <h2>{getGreeting()}, Admin 👋</h2>
           <p>Here's what's happening across GlobeTrotter today.</p>
         </div>
         <div className="hero-actions">
@@ -78,11 +92,11 @@ const Dashboard = () => {
             <option value="1Y">Last Year</option>
           </select>
           <button className="btn-primary flex-center gap-sm" onClick={() => {
-            const reportData = Object.entries(currentKpis).map(([key, data]) => ({
-              Metric: data.label || key,
-              Value: data.value,
-              Trend: data.trend
-            }));
+            const reportData = [
+              { Metric: 'Total Users', Value: m.total_users },
+              { Metric: 'Total Trips', Value: m.total_trips },
+              { Metric: 'Total Cities', Value: m.total_cities }
+            ];
             downloadCSV(reportData, 'kpi_report');
           }}>
             <Download size={16} /> Export Report
@@ -94,50 +108,44 @@ const Dashboard = () => {
       <div className="kpi-grid">
         <KpiCard 
           title="Total Users" 
-          value={currentKpis.totalUsers.value} 
-          trend={currentKpis.totalUsers.trend}
-          isPositive={currentKpis.totalUsers.isPositive}
-          label={currentKpis.totalUsers.label}
+          value={m.total_users || 0} 
+          trend={getTrend(m.total_users, '+5%')}
+          isPositive={true}
           icon={Users} 
         />
         <KpiCard 
-          title="Active Trips" 
-          value={currentKpis.activeTrips.value} 
-          trend={currentKpis.activeTrips.trend}
-          isPositive={currentKpis.activeTrips.isPositive}
-          label={currentKpis.activeTrips.label}
+          title="Active Users" 
+          value={m.active_users || 0} 
+          trend={getTrend(m.active_users, '+2%')}
+          isPositive={true}
           icon={Map} 
         />
         <KpiCard 
-          title="Trips Created" 
-          value={currentKpis.tripsCreated.value} 
-          trend={currentKpis.tripsCreated.trend}
-          isPositive={currentKpis.tripsCreated.isPositive}
-          label={currentKpis.tripsCreated.label}
+          title="Total Trips" 
+          value={m.total_trips || 0} 
+          trend={getTrend(m.total_trips, '+12%')}
+          isPositive={true}
           icon={PlusCircle} 
         />
         <KpiCard 
-          title="Public Trips" 
-          value={currentKpis.publicTrips.value} 
-          trend={currentKpis.publicTrips.trend}
-          isPositive={currentKpis.publicTrips.isPositive}
-          label={currentKpis.publicTrips.label}
+          title="Published Trips" 
+          value={m.published_trips || 0} 
+          trend={getTrend(m.published_trips, '+8%')}
+          isPositive={true}
           icon={Globe2} 
         />
         <KpiCard 
           title="Destinations" 
-          value={currentKpis.destinations.value} 
-          trend={currentKpis.destinations.trend}
-          isPositive={currentKpis.destinations.isPositive}
-          label={currentKpis.destinations.label}
+          value={m.total_cities || 0} 
+          trend={getTrend(m.total_cities, '+5%')}
+          isPositive={true}
           icon={MapPin} 
         />
         <KpiCard 
           title="Activities" 
-          value={currentKpis.activities.value} 
-          trend={currentKpis.activities.trend}
-          isPositive={currentKpis.activities.isPositive}
-          label={currentKpis.activities.label}
+          value={m.total_activities || 0} 
+          trend={getTrend(m.total_activities, '+3%')}
+          isPositive={true}
           icon={Activity} 
         />
       </div>
@@ -168,17 +176,17 @@ const Dashboard = () => {
             <button className="btn-secondary" onClick={() => navigate('/admin/destinations')}>View All</button>
           </div>
           <div className="destinations-list">
-            {trendingDestinations.map((dest, idx) => (
+            {destinations.slice(0, 5).map((dest, idx) => (
               <div key={dest.id} className="destination-item">
                 <span className="dest-rank">{String(idx + 1).padStart(2, '0')}</span>
-                <img src={dest.image} alt={dest.city} className="dest-image" />
+                <img src={dest.image || 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=400&q=80'} alt={dest.name} className="dest-image" />
                 <div className="dest-info">
-                  <h4>{dest.city}</h4>
+                  <h4>{dest.name}</h4>
                   <span>{dest.country}</span>
                 </div>
                 <div className="dest-stats">
-                  <div className="dest-searches">{dest.searches} searches</div>
-                  <div className="dest-trend positive">{dest.trend}</div>
+                  <div className="dest-searches">{dest.popularity_score || 'N/A'} searches</div>
+                  <div className="dest-trend positive">+5%</div>
                 </div>
               </div>
             ))}
@@ -189,12 +197,12 @@ const Dashboard = () => {
           <DataTable 
             title="Popular Activities"
             columns={[
-              { header: 'Activity', accessor: 'activity', render: (row) => <strong style={{ color: 'var(--text-primary)' }}>{row.activity}</strong> },
-              { header: 'Destination', accessor: 'destination' },
-              { header: 'Searches', accessor: 'searches' },
-              { header: 'Rating', accessor: 'rating', render: (row) => <span>⭐ {row.rating}</span> }
+              { header: 'Activity', accessor: 'name', render: (row) => <strong style={{ color: 'var(--text-primary)' }}>{row.name}</strong> },
+              { header: 'Destination ID', accessor: 'city_id' },
+              { header: 'Price', render: (row) => <span>{row.currency || '$'} {row.price || '0'}</span> },
+              { header: 'Rating', accessor: 'rating', render: (row) => <span>⭐ {row.rating || 'N/A'}</span> }
             ]}
-            data={popularActivities}
+            data={activities.slice(0, 5)}
             onViewAll={() => navigate('/admin/activities')}
           />
         </div>
@@ -205,7 +213,7 @@ const Dashboard = () => {
         <DataTable 
           title="Recent Users"
           columns={userColumns}
-          data={recentUsers}
+          data={users.slice(0, 5)}
           onViewAll={() => navigate('/admin/users')}
         />
         <div className="card health-widget">
@@ -235,7 +243,7 @@ const Dashboard = () => {
         <DataTable 
           title="Recent Trips"
           columns={tripColumns}
-          data={recentTrips}
+          data={trips.slice(0, 5)}
           onViewAll={() => navigate('/admin/trips')}
         />
       </div>

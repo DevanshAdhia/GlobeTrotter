@@ -24,9 +24,9 @@ const DestinationDetails = () => {
     { name: 'Week 4', searches: parseInt(dest.searches.toString().replace(/,/g, '')) / 2 || 1000, trips: 1200 },
   ];
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this destination?')) {
-      deleteDestination(dest.id);
+      await deleteDestination(dest.id);
       navigate('/admin/destinations');
     }
   };

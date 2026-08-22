@@ -18,9 +18,9 @@ const Users = () => {
   const [newUser, setNewUser] = useState({ user: '', email: '', status: 'Active' });
 
   const filteredUsers = users.filter(user => {
-    const matchesSearch = user.user.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          user.email.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesStatus = statusFilter === 'All' || user.status === statusFilter;
+    const matchesSearch = (user.name || '').toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          (user.email || '').toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = statusFilter === 'All' || (statusFilter === 'Active' ? user.is_active : !user.is_active);
     return matchesSearch && matchesStatus;
   });
 
@@ -31,11 +31,10 @@ const Users = () => {
   const handleExport = () => {
     const exportData = filteredUsers.map(u => ({
       ID: u.id,
-      Name: u.user,
+      Name: u.name,
       Email: u.email,
-      Joined: u.joined,
-      Trips: u.trips,
-      Status: u.status
+      Role: u.role,
+      Status: u.is_active ? 'Active' : 'Inactive'
     }));
     downloadCSV(exportData, 'globetrotter_users');
   };
@@ -45,12 +44,11 @@ const Users = () => {
     if (!newUser.user || !newUser.email) return;
 
     addUser({
-      avatar: newUser.user.charAt(0).toUpperCase(),
-      user: newUser.user,
+      name: newUser.user,
       email: newUser.email,
-      joined: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      trips: 0,
-      status: newUser.status
+      role: 'user',
+      is_active: newUser.status === 'Active',
+      created_at: new Date().toISOString()
     });
     
     setIsModalOpen(false);
@@ -60,20 +58,22 @@ const Users = () => {
   const columns = [
     { 
       header: 'User', 
-      accessor: 'user',
-      render: (row) => (
-        <div className="table-user-cell" onClick={() => navigate(`/admin/users/${row.id}`)} style={{cursor: 'pointer'}}>
-          <div className="table-avatar">{row.avatar}</div>
-          <div className="table-user-info">
-            <span className="table-user-name">{row.user}</span>
-            <span className="table-user-email">{row.email}</span>
+      accessor: 'name',
+      render: (row) => {
+        const initial = row.name ? row.name.charAt(0) : (row.email ? row.email.charAt(0) : 'U');
+        return (
+          <div className="table-user-cell" onClick={() => navigate(`/admin/users/${row.id}`)} style={{cursor: 'pointer'}}>
+            <div className="table-avatar">{row.profile_photo || initial.toUpperCase()}</div>
+            <div className="table-user-info">
+              <span className="table-user-name">{row.name || 'Unnamed User'}</span>
+              <span className="table-user-email">{row.email}</span>
+            </div>
           </div>
-        </div>
-      )
+        );
+      }
     },
-    { header: 'Joined', accessor: 'joined' },
-    { header: 'Trips', accessor: 'trips' },
-    { header: 'Status', accessor: 'status', isStatus: true }
+    { header: 'Role', accessor: 'role' },
+    { header: 'Status', render: (row) => <span className={`status-badge ${row.is_active ? 'status-success' : 'status-danger'}`}>{row.is_active ? 'Active' : 'Inactive'}</span> }
   ];
 
   return (

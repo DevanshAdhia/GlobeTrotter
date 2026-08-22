@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useClient } from '../../context/ClientContext';
 import { Search, MapPin, Compass, Star } from 'lucide-react';
 
 const Discover = () => {
+  const navigate = useNavigate();
   const { trendingDestinations, popularActivities } = useClient();
   const [activeTab, setActiveTab] = useState('destinations'); // destinations or activities
   const [searchQuery, setSearchQuery] = useState('');

@@ -1,6 +1,8 @@
 import { PieChart, Pie, Cell, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer } from 'recharts';
 import ChartCard from '../../components/admin/ChartCard';
 
+const COLORS = ['var(--primary)', 'var(--info)', 'var(--success)', 'var(--warning)', 'var(--danger)', '#8884d8'];
+
 const Analytics = () => {
   // Mock data for extended analytics
   const userRetentionData = [

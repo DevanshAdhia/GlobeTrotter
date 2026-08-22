@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useClient } from '../../context/ClientContext';
+import { tripsAPI } from '../../services/api';
 import { Calendar, MapPin, Plus, Clock, DollarSign, GripVertical, Check, ArrowLeft, ArrowRight } from 'lucide-react';
 
 const ItineraryBuilder = () => {
@@ -28,14 +29,29 @@ const ItineraryBuilder = () => {
     setShowActivityModal(true);
   };
 
-  const addActivityToDay = (activity) => {
-    setDays(days.map(d => {
-      if (d.id === activeDayForModal) {
-        return { ...d, activities: [...d.activities, activity] };
+  const addActivityToDay = async (activity) => {
+    try {
+      // Save to backend as a trip stop
+      if (trip && trip.start_date) {
+        await tripsAPI.addStop(trip.id, {
+          city_id: activity.city_id || 1,
+          arrival_date: trip.start_date,
+          departure_date: trip.start_date,
+          sequence: activeDayForModal
+        });
       }
-      return d;
-    }));
-    setShowActivityModal(false);
+      
+      setDays(days.map(d => {
+        if (d.id === activeDayForModal) {
+          return { ...d, activities: [...d.activities, activity] };
+        }
+        return d;
+      }));
+    } catch (err) {
+      console.error("Failed to add stop to trip", err);
+    } finally {
+      setShowActivityModal(false);
+    }
   };
 
   return (
